@@ -16,11 +16,11 @@
     <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
     [value]="products"
     [paginator]="true"
-    [rows]="5"
+    [rows]="10"
     [showCurrentPageReport]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [rowsPerPageOptions]="[5,10]">
+    [rowsPerPageOptions]="[10,20,30]">
         <ng-template pTemplate="header">
             <tr>
                 <th>Code</th>
