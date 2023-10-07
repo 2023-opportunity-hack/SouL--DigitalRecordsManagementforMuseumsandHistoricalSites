@@ -36,3 +36,6 @@
   - tags (strings)
   - caption <- Thinh
   - feature vector
+
+## services
+[ ] Image(filename) loading service
