@@ -4,7 +4,7 @@ import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { FileUploadModule } from 'primeng/fileupload';
-import { ToastModule } from 'primeng/toast';
+// import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
 
@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
     FormsModule,
     InputTextModule,
     FileUploadModule,
-    ToastModule
+    // ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent],
