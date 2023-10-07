@@ -14,14 +14,14 @@
 ## Feature Extraction:
 - text:
   - Keywords using LDA
-  - BERT Feature embeddings
+  - ~BERT Feature embeddings~
 - image:
   - text using OCR
-  - caption using CLIP
-  - ResNet50 feature embeddings
+  - ~caption using CLIP~
+  - ~ResNet50 feature embeddings~
   - keyword tags
 - audio:
-  - speech-to-text using Whisper
+  - ~speech-to-text using Whisper~
   - audio embeddings?
 
 ## Search Engine Optimization (UI/UX)
