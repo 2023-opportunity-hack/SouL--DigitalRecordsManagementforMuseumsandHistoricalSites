@@ -7,7 +7,7 @@ This document explains how to use the provided Python files for image captioning
 Make sure you have the required dependencies installed before using the image captioning function. All of the dependencies can be found in `backend/src/requirements.txt`.
 
 ## Usage
-First, import the check_image.py file, which contains the necessary functions for checking if a file is a valid image. Additionally, import the image_caption.py file that contains the caption function for generating captions.
+First, import the check_image.py file, which contains the necessary functions for checking if a file is a valid image.
 - Import the Python files:
 ```Python
 from image_caption import *
