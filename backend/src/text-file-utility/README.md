@@ -7,7 +7,7 @@ This document explains how to use the provided Python files for working with tex
 Make sure you have the required dependencies installed before using the image captioning function. All of the dependencies can be found in `backend/src/requirements.txt`.
 
 ## Usage
-First, import the txt-reader.py file, which contains the necessary functions for checking if a file is a valid image.
+First, import the txt-reader.py file, which contains the necessary functions for checking the files and read `txt`, `doc`, and `docx` files. Additionally, this script updates old `doc` files format into a more modern `docx` format.
 - Import the Python files:
 ```Python
 from txt-reader import *
