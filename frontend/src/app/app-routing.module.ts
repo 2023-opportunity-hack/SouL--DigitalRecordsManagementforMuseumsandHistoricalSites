@@ -4,6 +4,7 @@ import { SearchComponent } from './search/search.component';
 import { TableComponent } from './table/table.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'table', component: TableComponent}, // Default route
   { path: 'login', component: SearchComponent }, // Route to SearchComponent
 ];

@@ -20,7 +20,7 @@ export class TableComponent implements OnInit {
   offset = 0;
   sort_by = 'rank';
   sort_order = 1;
-  file_type = 'img';
+  filetype = 'img';
   total_pages = 0;
   pagination_line = ""
 
@@ -92,7 +92,7 @@ export class TableComponent implements OnInit {
       alert("Type query first")
       return
     }
-    let response: any = this.dataService.contextSearch(this.query, this.sort_by, this.sort_order, this.file_type);
+    let response: any = this.dataService.contextSearch(this.query, this.sort_by, this.sort_order, this.filetype);
 
     this.limit = response['limit']
     this.files = response['query']
