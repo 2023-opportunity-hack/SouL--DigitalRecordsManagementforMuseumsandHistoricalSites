@@ -9,6 +9,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { HttpClientModule } from  '@angular/common/http';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 
 import { AppComponent } from './app.component';
 
@@ -21,6 +22,7 @@ import { AppComponent } from './app.component';
     TableModule,
     FormsModule,
     InputTextModule,
+    NgxDocViewerModule,
     FileUploadModule,
     ToastModule,
     PaginatorModule,
