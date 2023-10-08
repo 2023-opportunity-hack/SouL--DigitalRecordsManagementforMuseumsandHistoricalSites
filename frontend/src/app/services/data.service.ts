@@ -5,11 +5,11 @@ import { HttpClient } from  '@angular/common/http';
   providedIn: 'root'
 })
 export class DataService {
-  url = 'https://localhost'
+  url = 'https://localhost:8080/'
 
   constructor(private http: HttpClient) { }
 
-  getQueryData(query: string = '', limit: number, offset: number, sort_by: string, sort_order: string, file_type: string) {
+  contextSearch(query: string = '', limit: number, offset: number, sort_by: string, sort_order: string, file_type: string) {
     let request = {
       query: query,
       limit: limit,
@@ -18,6 +18,10 @@ export class DataService {
       sort_order: sort_order,
       file_type: file_type
     }
+
+    return this.http.post(this.url+"search", request).subscribe((response: any) => {
+      return response
+    })
 
     let api_response  = {
       limit: 5,
@@ -86,12 +90,11 @@ export class DataService {
         },
       ]
     }
-
     return api_response
+  }
 
-    return this.http.post(this.url, request).subscribe((response: any) => {
-      return response
-    })
+  imageSearch() {
+
   }
 
   getFiles() {

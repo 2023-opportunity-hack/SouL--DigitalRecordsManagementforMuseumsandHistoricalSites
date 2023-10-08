@@ -9,9 +9,9 @@
                 <span class="p-input-icon-left">
                     <input type="text" pInputText [(ngModel)]="query" class="larger-input" placeholder="Type here..." style="width: 600px; padding: 16px; margin-right: 30px;" />
                 </span>
-            <p-button class="ms-3 large-button" label="Soul Search" (click)="getQueryData()"></p-button>
-            <p-fileUpload class="ms-3" mode="basic" chooseLabel="Soul Lens" url="https://www.primefaces.org/cdn/api/upload.php"
-                accept="image/*" (onUpload)="onUpload($event)"></p-fileUpload>
+            <p-button class="ms-3 large-button" label="Soul Search" (click)="showQueryTable()"></p-button>
+            <p-fileUpload class="ms-3" mode="basic" chooseLabel="Soul Lens" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php"
+              accept="image/*" (onUpload)="onUpload($event)" [auto]="true"></p-fileUpload>
         
             <p-toast></p-toast>
             </div>
@@ -23,9 +23,12 @@
       [value]="files"
       [paginator]="true"
       [rows]="limit"
+      styleClass="p-datatable-striped"
+      [tableStyle]="{ 'min-width': '50rem' }"
       [currentPageReportTemplate]="pagination_line"
       (sortFunction)="customSort($event)"
       [customSort]="true"
+      (onPage)="pageChange($event)"
       [rowsPerPageOptions]="[5, 10]"
     >
       <ng-template pTemplate="header">
