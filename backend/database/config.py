@@ -1,8 +1,8 @@
 # ELASTIC SEARCH LOGIN CONFIGS
-from .runnable_configs import ENVIRONMENT
+from runnable_configs import ENVIRONMENT
 
 
-KEY_PATH = "../fernetKey.key"
+KEY_PATH = "../../fernetKey.key"
 USER_NAME = "test"
 PASSWORD = b'gAAAAABlIg0vQSh48oNMLQf8L0cSKXBUUfmvKJY75WKCEMJn7jP6WR9YtR0xhJk7SUWfOPGRz8vCY0OSbYgt9mmXR6lYGJ9e1g=='
 

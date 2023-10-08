@@ -1,10 +1,12 @@
-from .config import INDEX_NAME, URL, USER_NAME, KEY_PATH, PASSWORD
-from .fernetKeyManager import FernetKeyManager
-
+# IMPORTS
+from config import INDEX_NAME, URL, USER_NAME, KEY_PATH, PASSWORD
+from fernetKeyManager import FernetKeyManager
+import time
 from dataclasses import dataclass
 from elasticsearch import Elasticsearch
 from typing import List
 
+# ENTITY CLASSS
 @dataclass
 class ElasticSearchReqDoc:
   filename: str
@@ -54,6 +56,8 @@ class ElasticSearchClient:
         self.create_index()  # Create the Elasticsearch index if it doesn't exist
 
     def create_index(self):
+        start_time = time.time()
+
         # Check if the index exists
         index_exists = self.es.indices.exists(index=self.index_name)
 
@@ -62,14 +66,22 @@ class ElasticSearchClient:
             self.es.indices.create(index=self.index_name, ignore=400, body=MAPPINGS)
         else:
             print("Index already exists")
+        
+        print(self.get_time_elapsed(start_time, "Creating Index"))
 
     def insert_document(self, documentObj: ElasticSearchReqDoc):
+        start_time = time.time()
+
         # Insert a document into the Elasticsearch index
         self.es.index(index=self.index_name, body=self.create_document(documentObj))
+        print(self.get_time_elapsed(start_time, "Inserting Document"))
 
     def search(self, query):
+        start_time = time.time()
+
         # Perform a search query in the Elasticsearch index
         response = self.es.search(index=self.index_name, body=query)
+        print(self.get_time_elapsed(start_time, "Searching a Query"))
         return response['hits']['hits']
 
     def create_document(self, documentObj: ElasticSearchReqDoc):
@@ -131,6 +143,8 @@ class ElasticSearchClient:
         Returns:
             list: List of results including score, filename, creation_date, and filetype.
         """
+        start_time = time.time()
+
         query = {
             'query': {
                 'script_score': {
@@ -162,11 +176,16 @@ class ElasticSearchClient:
                 'creation_date': _src['dateCreated'],
                 'filetype': _src['fileType'],
             })
+
+        print(self.get_time_elapsed(start_time, "Comparing Vector Embeddings"))
         return ret
 
     def view_data(self):
+        start_time = time.time()
+
         # View all data in the Elasticsearch index
         query = {"query": {"match_all": {}}}
+        print(self.get_time_elapsed(start_time, "Viewing All Data"))
         return self.search(query)
 
     def view_top_n_items(self, n=10):
@@ -174,6 +193,15 @@ class ElasticSearchClient:
         query = {"query": {"match_all": {}}, "size": n}
         return self.search(query)
 
-
-# Example usage
+    def get_time_elapsed(self, starttime, functionCallName):
+        end_time = time.time()
+        elapsed_time = end_time - starttime
+        
+        # Convert elapsed_time to minutes, seconds, and milliseconds
+        minutes, seconds = divmod(int(elapsed_time), 60)
+        milliseconds = int((elapsed_time - int(elapsed_time)) * 1000)
+        
+        return f"Total Time taken for the {functionCallName}: {minutes:02}:{seconds:02}:{milliseconds:03}"
+# # Example usage
 ES = ElasticSearchClient(URL, USER_NAME, FernetKeyManager(KEY_PATH).decrypt_password(PASSWORD))
+ES.view_data()
