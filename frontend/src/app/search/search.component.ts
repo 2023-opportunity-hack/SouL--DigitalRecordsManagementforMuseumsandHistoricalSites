@@ -1,24 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import {DataService} from './services/data.service';
+import {DataService} from '../services/data.service';
 import { Router } from '@angular/router';
+
 
 // Import the AuthService type from the SDK
 import { AuthService } from '@auth0/auth0-angular';
 
-
 @Component({
-  selector: 'app-root',
-  // selector: 'app-auth-button',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [MessageService]
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss']
 })
-
-
-
-export class AppComponent implements OnInit {
-  query: string = "";
+export class SearchComponent implements OnInit {
+  query: string = ''
   files: any = [];
   limit = 10;
   offset = 0;
@@ -57,7 +52,7 @@ export class AppComponent implements OnInit {
     },
   ]
 
-  constructor(private messageService: MessageService, private dataService: DataService, public auth: AuthService, public router: Router) {}
+  constructor(private messageService: MessageService, private dataService: DataService, public auth: AuthService,  public router: Router) {}
   
   ngOnInit(): void {
   }

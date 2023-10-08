@@ -9,13 +9,23 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { HttpClientModule } from  '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module'; // CLI imports AppRoutingModule
+
 // import { MultiSelectModule } from 'primeng/multiselect';
 
 import { AppComponent } from './app.component';
 
+
+// Import the module from the SDK
+import { AuthModule } from '@auth0/auth0-angular';
+import { SearchComponent } from './search/search.component';
+// import { AuthComponent } from './auth/auth.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchComponent,
+    // AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -27,11 +37,17 @@ import { AppComponent } from './app.component';
     PaginatorModule,
     ButtonModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule.forRoot({
+      domain: 'dev-jrjxmhfae7ttlg5k.us.auth0.com',
+      clientId: 'Qrf6s2X0Bue3LTQtv6zUNZzHo5Qc7GRZ',
+      authorizationParams: {
+      redirect_uri: 'http://localhost:4200'
+      }
+    }),
+    AppRoutingModule
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 
-export class AppModule { 
-}
+export class AppModule {}
