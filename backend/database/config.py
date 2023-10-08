@@ -1,5 +1,5 @@
 # ELASTIC SEARCH LOGIN CONFIGS
-from database.runnable_configs import ENVIRONMENT
+from .runnable_configs import ENVIRONMENT
 
 
 KEY_PATH = "../fernetKey.key"

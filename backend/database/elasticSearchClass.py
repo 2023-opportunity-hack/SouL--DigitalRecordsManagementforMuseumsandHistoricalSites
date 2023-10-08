@@ -1,41 +1,57 @@
-from elasticsearch import Elasticsearch
+from .config import INDEX_NAME, URL, USER_NAME, KEY_PATH, PASSWORD
+from .fernetKeyManager import FernetKeyManager
 
-from config import INDEX_NAME, URL, USER_NAME, KEY_PATH, PASSWORD
-from database.fernetKeyManager import FernetKeyManager
+from dataclasses import dataclass
+from elasticsearch import Elasticsearch
+from typing import List
+
+@dataclass
+class ElasticSearchReqDoc:
+  filename: str
+  chunk_id: int
+  file_type: str
+  keywords: List[str]
+  creation_date: str  # MM/DD/YYYY
+  feat_vec: List[float]
+
 
 class ElasticSearchClient:
-    def __init__(self, host, username, password):
+    def __init__(self, host, username, password, index_name=INDEX_NAME):
         self.host = host
         self.username = username
         self.password = password
+        print(self.password)
         self.es = Elasticsearch([host], basic_auth=(username, password))
+        self.index_name = index_name
+        self.create_index()
 
-    def create_index(self, index_name, mappings):
+    def create_index(self):
         # Check if the index exists
-        index_exists = self.es.indices.exists(index=index_name)
+        index_exists = self.es.indices.exists(index=self.index_name)
 
         # If the index does not exist, create it
         if not index_exists:
-            self.es.indices.create(index=index_name, ignore=400, body=mappings)
+            tmp = self.es.indices.create(index=self.index_name, ignore=400, body=None)
+            print(tmp)
         else:
             print("Index already exists")
 
-    def insert_document(self, index_name, documentObj):
-        self.es.index(index=index_name, body=self.create_document(documentObj))
+    def insert_document(self, documentObj: ElasticSearchReqDoc):
+        self.es.index(index=self.index_name, body=self.create_document(documentObj))
 
-    def search(self, index_name, query):
-        response = self.es.search(index=index_name, body=query)
+    def search(self, query):
+        response = self.es.search(index=self.index_name, body=query)
         return response['hits']['hits']
 
-    def create_document(self, documentObj):
+    def create_document(self, documentObj: ElasticSearchReqDoc):
         return {
             'filename': documentObj.filename,
             'chunkId': documentObj.chunk_id,
-            'fileType': documentObj.fileType,
+            'fileType': documentObj.file_type,
             'keywords': documentObj.keywords,
-            'location': documentObj.location,
-            'dateCreated': documentObj.dateCreated,
-            'vectorEmbeddings': documentObj.vectorEmbeddings
+            #'location': documentObj.location,
+            'dateCreated': documentObj.creation_date,
+            'vectorEmbeddings': documentObj.feat_vec
             }
     
 
@@ -81,10 +97,10 @@ class ElasticSearchClient:
     def search_filters(self,filter_field, filter_value,filter_type=None):
         query = {"query":{}}
         query["query"] = self.apply_filter(filter_field, filter_value,filter_type)
-        return self.search(INDEX_NAME, query)
+        return self.search(self.index_name, query)
 
 
-    def compare_vector_embeddings(self, index_name, query_vector):
+    def compare_vector_embeddings(self, query_vector):
         query = {
             'query': {
                 'script_score': {
@@ -102,56 +118,19 @@ class ElasticSearchClient:
         }
 
         # Execute the similarity query
-        results = self.search(index=index_name, body=query)
+        results = self.search(index=self.index_name, body=query)
 
         # Process and print the results
         return results['hits']['hits']
 
 
-    def view_data(self, index_name):
+    def view_data(self):
         query = {"query": {"match_all": {}}}
-        return self.search(index_name, query)
+        return self.search(self.index_name, query)
 
-    def view_top_n_items(self, index_name, n=10):
+    def view_top_n_items(self, n=10):
         query = {"query": {"match_all": {}}, "size": n}
-        return self.search(index_name, query)
+        return self.search(self.index_name, query)
 
 
-fernetObj = FernetKeyManager(KEY_PATH)
-
-es = ElasticSearchClient(URL, USER_NAME, fernetObj.decrypt_password(PASSWORD))
-
-es.create_index(INDEX_NAME, {
-  "mappings": {
-    "properties": {
-      "_id": {
-        "type": "keyword"
-      },
-      "filename": {
-        "type": "keyword"
-      },
-      "chunkId": {
-        "type": "keyword"
-      },
-      "fileType": {
-        "type": "keyword"
-      },
-      "keywords": {
-        "type": "keyword"
-      },
-      "location": {
-        "type": "geo_point"
-      },
-      "dateCreated": {
-        "type": "date"
-      },
-      "vectorEmbeddings": {
-        "type": "dense_vector"
-      }
-    }
-  }
-})
-es.insert_document(INDEX_NAME, '1', {"field1": "value1"})
-
-top_items = es.view_top_n_items(INDEX_NAME, n=5)
-
+ES = ElasticSearchClient(URL, USER_NAME, FernetKeyManager(KEY_PATH).decrypt_password(PASSWORD))

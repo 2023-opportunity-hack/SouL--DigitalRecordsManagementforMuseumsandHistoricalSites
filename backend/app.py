@@ -1,5 +1,6 @@
 # our scripts
 from src import text_vectorization
+from database.elasticSearchClass import ES
 
 # 3rd-party libs
 import uvicorn
@@ -23,21 +24,28 @@ def root():
 class SearchResponse(BaseModel):
   filename: str
   rank: int
+  # date: timestamp
+  # filetype: str
 
 @app.get('/search')
 def search(
   query: str,
-  date: Optional[str]=None,
   filetype: Optional[str]=None,
+  sort_by: Optional[str]=None,
   limit: int=10,
-  offset: int=0
+  offset: int=0,
+  # TODO (rohan)
+  # total_results: int  # len of result
+  # sort_by: str
+  # start_date: Date obj  # creation date
+  # end_date: Date obj  # creation date
 ) -> List[SearchResponse]:
   # preprocess query
   query = query.strip()
   # get query embeddings
   query_vec = text_vectorization.vectorize(query).squeeze()
   # search in elastic search > will return list of filenames
-  #result = elastic_search.retrieve(query_vec)
+  #result = ES.compare_query_vectors(query_vec)
   # TODO (rohan): query postgres for metadata
   # add rank to the filenames & return
   '''
@@ -54,11 +62,12 @@ def search(
 
 @app.post('/uploadfile', status_code=200)
 def upload(file: UploadFile):
-  save_fn = os.path.join(STORAGE_DIR, file.filename)
-  if os.path.exists(save_fn): raise HTTPException(status_code=403, detail=f'\'{file.filename}\' already exists')
+  filename = file.filename.split('/')[-1]  # we don't want the user to specify path, just a filename.extension
+  save_fn = os.path.join(STORAGE_DIR, filename)
+  if os.path.exists(save_fn): raise HTTPException(status_code=403, detail=f'\'{filename}\' already exists')
   with open(save_fn, 'wb') as f: f.write(file.file.read())
   # TODO (rohan): trigger controller service
-  return {'filename': file.filename}
+  return {'filename': filename}
 
 @app.get('/getfile')
 def getfile(filename: str):
