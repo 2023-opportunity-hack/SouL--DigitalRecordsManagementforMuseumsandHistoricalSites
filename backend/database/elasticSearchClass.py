@@ -49,7 +49,6 @@ class ElasticSearchClient:
         self.host = host
         self.username = username
         self.password = password
-        print(self.password)
         self.es = Elasticsearch([host], basic_auth=(username, password))
         self.index_name = index_name
         self.create_index()
@@ -60,8 +59,7 @@ class ElasticSearchClient:
 
         # If the index does not exist, create it
         if not index_exists:
-            tmp = self.es.indices.create(index=self.index_name, ignore=400, body=MAPPINGS)
-            print(tmp)
+            self.es.indices.create(index=self.index_name, ignore=400, body=MAPPINGS)
         else:
             print("Index already exists")
 
