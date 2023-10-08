@@ -4,7 +4,7 @@ import docx
 from doc2docx import convert
 
 
-def read_file(file_path: str) -> str:
+def read_text_file(file_path: str) -> str:
     if (not is_image_file(file_path)):
         return "Not a valid text file path."
     file_extension = file_path[len(file_path)-4:]
