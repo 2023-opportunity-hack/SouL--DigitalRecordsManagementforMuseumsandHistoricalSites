@@ -47,3 +47,9 @@
     - call controller service (event trigger)
     - return 200 if success
   - delete file
+[ ] API
+  - query
+  related storage service
+    - add file
+    - get file
+    - read file

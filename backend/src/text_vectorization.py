@@ -1,6 +1,7 @@
 import torch
-import numpy as np
 torch.set_grad_enabled(False)
+
+import numpy as np
 
 from transformers import AutoTokenizer, AutoModel
 
@@ -20,4 +21,4 @@ def mean_pooling(model_output, attention_mask):
 def vectorize(text: str) -> np.ndarray:
   encoded_input = tokenizer(text, padding=True, truncation=True, return_tensors='pt')
   model_output = model(**encoded_input)
-  return mean_pooling(model_output, encoded_input['attention_mask']).numpy()
+  return mean_pooling(model_output, encoded_input['attention_mask']).detach().numpy()
