@@ -47,7 +47,7 @@ The front-end solution for SouLSearch is built using:
 * AngularJS
 
 Our End-to-End System Design diagram:
-![End-to-end Design Diagram](data/end-to-end.png)
+![End-to-end Design Diagram](data/soul.jpg)
 
 <hr>
 
