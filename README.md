@@ -81,7 +81,7 @@ We are excited to continue developing and improving our system. Here are some of
 * Scale our solution on the cloud using AWS or GCP. This will allow us to handle larger datasets and more concurrent users.
 * Design a CI/CD pipeline to automatically create containers and deploy them to the cloud using Jenkins or GitHub Actions. This will streamline our development and deployment process.
 * Implement a better authetication system. We have decided on our future ***Auth0*** implementation design:
-![Front-end Design Diagram](data/front-end.png)
+![Front-end Design Diagram](data/front-end-mod.png)
 
 
 In addition to these next steps, we are also interested in exploring the following:
