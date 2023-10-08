@@ -30,19 +30,19 @@ export class AppComponent implements OnInit {
       'filter': false
     },
     {
-      'name':'name',
+      'name':'filename',
       'label': 'Name',
       'width':'40%',
       'filter': true
     },
     {
-      'name':'type',
+      'name':'filetype',
       'label': 'Categories',
       'width':'20%',
       'filter': true
     },
     {
-      'name':'date',
+      'name':'creation_date',
       'label': 'Date',
       'width':'40%',
       'filter': false
