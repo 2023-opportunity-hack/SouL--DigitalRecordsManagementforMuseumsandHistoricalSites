@@ -25,7 +25,7 @@ def root():
 class SearchResponse(BaseModel):
   filename: str
   rank: int
-  date: str  ## MM/DD/YYYY
+  creation_date: str  ## MM/DD/YYYY
   filetype: str
 
 @app.get('/search')
@@ -58,7 +58,7 @@ def search(
       'filename': res['filename'],
       'rank': i+1,
       'filetype': res['filetype'],
-      'creation_date': res['date']
+      'creation_date': res['creation_date']
     })
   return ret
     
