@@ -1,30 +1,31 @@
 from elasticsearch import Elasticsearch
 
 from config import INDEX_NAME, URL, USER_NAME, KEY_PATH, PASSWORD
-from database.fernetKeyManager import FernetKeyManager
+from fernetKeyManager import FernetKeyManager
 
 class ElasticSearchClient:
     def __init__(self, host, username, password):
         self.host = host
         self.username = username
         self.password = password
+        self.index = INDEX_NAME
         self.es = Elasticsearch([host], basic_auth=(username, password))
 
-    def create_index(self, index_name, mappings):
+    def create_index(self, mappings=None):
         # Check if the index exists
-        index_exists = self.es.indices.exists(index=index_name)
+        index_exists = self.es.indices.exists(index=self.index)
 
         # If the index does not exist, create it
         if not index_exists:
-            self.es.indices.create(index=index_name, ignore=400, body=mappings)
+            self.es.indices.create(index=self.index, ignore=400, body=mappings)
         else:
             print("Index already exists")
 
-    def insert_document(self, index_name, documentObj):
-        self.es.index(index=index_name, body=self.create_document(documentObj))
+    def insert_document(self, documentObj):
+        self.es.index(index=self.index, body=self.create_document(documentObj))
 
-    def search(self, index_name, query):
-        response = self.es.search(index=index_name, body=query)
+    def search(self, query):
+        response = self.es.search(index=self.index, body=query)
         return response['hits']['hits']
 
     def create_document(self, documentObj):
@@ -108,50 +109,72 @@ class ElasticSearchClient:
         return results['hits']['hits']
 
 
-    def view_data(self, index_name):
+    def view_data(self):
         query = {"query": {"match_all": {}}}
-        return self.search(index_name, query)
+        return self.search(query)
 
-    def view_top_n_items(self, index_name, n=10):
+    def view_top_n_items(self, n=10):
         query = {"query": {"match_all": {}}, "size": n}
-        return self.search(index_name, query)
+        return self.search(query)
 
 
+
+# TESTING
 fernetObj = FernetKeyManager(KEY_PATH)
-
 es = ElasticSearchClient(URL, USER_NAME, fernetObj.decrypt_password(PASSWORD))
+es.create_index()
 
-es.create_index(INDEX_NAME, {
-  "mappings": {
-    "properties": {
-      "_id": {
-        "type": "keyword"
-      },
-      "filename": {
-        "type": "keyword"
-      },
-      "chunkId": {
-        "type": "keyword"
-      },
-      "fileType": {
-        "type": "keyword"
-      },
-      "keywords": {
-        "type": "keyword"
-      },
-      "location": {
-        "type": "geo_point"
-      },
-      "dateCreated": {
-        "type": "date"
-      },
-      "vectorEmbeddings": {
-        "type": "dense_vector"
-      }
-    }
-  }
-})
-es.insert_document(INDEX_NAME, '1', {"field1": "value1"})
 
-top_items = es.view_top_n_items(INDEX_NAME, n=5)
+from datetime import datetime
 
+class DocumentObj:
+    def __init__(self, filename, chunk_id, file_type, keywords, location, date_created, vector_embeddings):
+        self.filename = filename
+        self.chunk_id = chunk_id
+        self.fileType = file_type
+        self.keywords = keywords
+        self.location = location
+        self.dateCreated = date_created
+        self.vectorEmbeddings = vector_embeddings
+
+# Initialize an empty list to store the generated document objects
+document_objects = []
+
+# Define the number of document objects you want to create
+num_documents = 500  # Change this to the desired number of objects
+
+def random_date():
+    import random
+    from datetime import datetime, timedelta
+
+    # Define the start and end dates for the date range
+    start_date = datetime(2023, 1, 1)
+    end_date = datetime(2023, 12, 31)
+
+    # Calculate the range of days between the start and end dates
+    date_range = end_date - start_date
+
+    # Generate a random number of days within the date range
+    random_days = random.randint(0, date_range.days)
+
+    # Calculate the random date by adding the random number of days to the start date
+    random_date = start_date + timedelta(days=random_days)
+
+    # Print the random date
+    return random_date.strftime("%Y-%m-%d")
+
+# # Create document objects in a loop with incremental values
+# for i in range(num_documents):
+#     filename = f"file_{i}.txt"
+#     chunk_id = i
+#     file_type = "txt"
+#     keywords = [f"keyword_{i}", f"keyword_{i+1}"]
+#     location = f"location_{i}"
+#     date_created =random_date() # Format date correctly
+#     vector_embeddings = [0.1 * i, 0.2 * i, 0.3 * i]  # Adjust values as needed
+
+#     document = DocumentObj(filename, chunk_id, file_type, keywords, location, date_created, vector_embeddings)
+#     es.insert_document(document)  # Use the dictionary directly
+
+top_items = es.view_data()
+print(len(top_items))
