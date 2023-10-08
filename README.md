@@ -39,13 +39,15 @@ The backend solution for SouLSearch is built using:
 * FastAPI
 * Elasticsearch
 * Powered by Machine Learning and Deep Learning
+More onto our ML/DL solution architecture:
+![End-to-end Design Diagram](data/back-end.png)
 
 The front-end solution for SouLSearch is built using:
 * JavaScript
 * AngularJS
 
-Our System Design diagram:
-![Block Diagram](data/block.png)
+Our End-to-End System Design diagram:
+![End-to-end Design Diagram](data/end-to-end.png)
 
 <hr>
 
@@ -78,6 +80,9 @@ We are excited to continue developing and improving our system. Here are some of
 * Containerize our code into Docker containers and deploy it as a service. This will make our code more portable, scalable, and maintainable.
 * Scale our solution on the cloud using AWS or GCP. This will allow us to handle larger datasets and more concurrent users.
 * Design a CI/CD pipeline to automatically create containers and deploy them to the cloud using Jenkins or GitHub Actions. This will streamline our development and deployment process.
+* Implement a better authetication system. We have decided on our future ***Auth0*** implementation design:
+![Front-end Design Diagram](data/front-end.png)
+
 
 In addition to these next steps, we are also interested in exploring the following:
 
