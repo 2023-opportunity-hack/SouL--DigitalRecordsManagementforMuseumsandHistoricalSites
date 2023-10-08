@@ -1,0 +1,15 @@
+Download Elastic Search From: https://www.elastic.co/downloads/elasticsearch
+
+cd D:\Installation\elasticsearch-8.10.2\bin
+elasticsearch.bat
+
+Docker Installation:
+docker network create elastic
+docker pull docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+wget https://artifacts.elastic.co/cosign.pub
+or 
+curl -o cosign.pub https://artifacts.elastic.co/cosign.pub
+docker run --name es01 --net elastic -p 9200:9200 -it -m 2GB docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+
+For windows: winpty docker run --name es01 --net elastic -p 9200:9200 -it -m 2GB docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+https://www.youtube.com/watch?v=nhlwEf5AZf0
