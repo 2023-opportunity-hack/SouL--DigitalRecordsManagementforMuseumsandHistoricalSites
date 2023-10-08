@@ -1,0 +1,75 @@
+<img src="https://images.squarespace-cdn.com/content/v1/58bdc372bebafb465ea13202/1496954370486-GU04MZSSZ5HYFGPADGC8/Fabyan-Villa-huber_slide.jpg" style="width:100%; opacity:70%; height:450px; object-fit:cover">
+<div class = "container my-5">
+        <div class="container-fluid px-0 text-center px-md-50">
+            <p class="mx-auto" style="font-size:50px; color: black; width: 600pxˆ; padding: 16px;"><em><b>Museum Adventures & Preservation Resources</b></em></p>
+        </div>
+
+        <div class="container my-5 text-center py-md-100">
+            <div class="mb-3 d-inline-flex align-items-center justify-content-center">
+                <span class="p-input-icon-left">
+                    <input type="text" pInputText [(ngModel)]="query" class="larger-input" placeholder="Type here..." style="width: 600px; padding: 16px; margin-right: 30px;" />
+                </span>
+            <p-button  class="ms-3 large-button" label="Soul Search" (click)="showQueryTable()"></p-button>
+            <p-fileUpload class="ms-3" mode="basic" chooseLabel="Upload file" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php"
+              accept="image/*" (onUpload)="onUpload($event)" [auto]="true"></p-fileUpload>
+        
+            <p-toast></p-toast>
+            </div>
+        </div>
+
+  <div class="card" *ngIf="showTable">
+      <!-- (onPage)="pageChange($event)" -->
+    <p-table
+      [value]="files"
+      [paginator]="true"
+      [rows]="limit"
+      styleClass="p-datatable-striped"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [currentPageReportTemplate]="pagination_line"
+      (sortFunction)="customSort($event)"
+      [customSort]="true"
+      (onPage)="pageChange($event)"
+      [rowsPerPageOptions]="[5, 10]"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th
+            *ngFor="let column of table_config"
+            [pSortableColumn]="column.name"
+            [width]="column.width"
+          >
+            {{ column.label }} <p-sortIcon [field]="column.name"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-file>
+        <tr>
+          <!-- <td *ngFor="let column of table_config">{{ file[column.name] }}</td> -->
+          <td *ngFor="let column of table_config">
+            <ng-container *ngIf="column.name === 'name'; else displayValue">
+              <a style="cursor: pointer;" (click)="dataService.downloadFile(file[column.name])">{{ file[column.name] }}</a>
+            </ng-container>
+            <ng-template #displayValue>
+              {{ file[column.name] }}
+            </ng-template>
+          </td>
+          
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <p-button
+          type="button"
+          icon="pi pi-plus"
+          styleClass="p-button-text"
+        ></p-button>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+        <p-button
+          type="button"
+          icon="pi pi-cloud"
+          styleClass="p-button-text"
+        ></p-button>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
