@@ -40,7 +40,7 @@ The backend solution for SouLSearch is built using:
 * Elasticsearch
 * Powered by Machine Learning and Deep Learning
 More onto our ML/DL solution architecture:
-![End-to-end Design Diagram](data/back-end.png)
+![End-to-end Design Diagram](data/soul.jpg)
 
 The front-end solution for SouLSearch is built using:
 * JavaScript
