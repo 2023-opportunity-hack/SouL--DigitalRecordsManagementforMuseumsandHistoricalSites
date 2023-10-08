@@ -111,8 +111,6 @@ export class DataService {
 
   downloadFile(fileName: string) {
     this.http.get(this.url+'getfile'+'?filename='+fileName, {responseType: 'blob' as 'json'}).subscribe((file: any) => {
-      debugger
-      
       let blob = new Blob([file], {type: file.type});
       var downloadURL = window.URL.createObjectURL(blob);
       var link = document.createElement('a');
