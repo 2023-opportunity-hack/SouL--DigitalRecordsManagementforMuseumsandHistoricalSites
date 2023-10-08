@@ -47,6 +47,7 @@ def search(
   query: str,
   filetype: Optional[str]=None,
   sort_by: Optional[str]=None,
+  sort_order: Optional[str]=None,
   # TODO (rohan): using limit and offset for pagination
   limit: int=10,
   offset: int=0,
