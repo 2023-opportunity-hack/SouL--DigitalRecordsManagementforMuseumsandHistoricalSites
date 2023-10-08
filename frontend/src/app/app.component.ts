@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-// import { MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -9,19 +9,20 @@ interface UploadEvent {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [MessageService]
 })
 export class AppComponent {
   query: string = "";
   products = this.getProductsData();
 
-  // constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService) {
 
-  // }
+  }
 
-//   onUpload(event: UploadEvent) {
-//     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-// }
+  onUpload(event: any) {
+    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+}
 
   getProductsData() {
     return [

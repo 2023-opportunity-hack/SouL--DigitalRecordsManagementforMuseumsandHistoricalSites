@@ -1,15 +1,15 @@
 <div class="container my-5">
 
-  <div class="mb-3 text-end">
+  <div class="mb-3 text-end d-inline-flex">
     <span class="p-input-icon-left">
       <i class="pi pi-search"></i> 
       <input type="text" pInputText [(ngModel)]="query" placeholder="type here..." />
-      <!-- <i class="pi pi-spin pi-spinner"></i> -->
-      <!-- <p-toast></p-toast> -->
-      <!-- maxFileSize="1000000" -->
-      <!-- <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
-        accept="image/*" (onUpload)="onUpload($event)"></p-fileUpload> -->
     </span>
+    <p-button class="ms-3" label="Soul Search"></p-button>
+      <p-fileUpload class="ms-3" mode="basic" chooseLabel="Soul Lens" url="https://www.primefaces.org/cdn/api/upload.php"
+        accept="image/*" (onUpload)="onUpload($event)"></p-fileUpload>
+
+        <p-toast></p-toast>
   </div>
 
   <div class="card">

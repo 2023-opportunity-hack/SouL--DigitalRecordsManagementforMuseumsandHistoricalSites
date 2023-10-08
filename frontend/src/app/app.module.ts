@@ -6,7 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FileUploadModule } from 'primeng/fileupload';
 import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
-// import { ToastModule } from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
 
@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
     FormsModule,
     InputTextModule,
     FileUploadModule,
-    // ToastModule
+    ToastModule,
     PaginatorModule,
     ButtonModule
   ],
