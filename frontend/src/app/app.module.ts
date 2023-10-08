@@ -20,12 +20,14 @@ import { AppComponent } from './app.component';
 // Import the module from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
 import { SearchComponent } from './search/search.component';
+import { TableComponent } from './table/table.component';
 // import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
+    TableComponent,
     // AuthComponent
   ],
   imports: [
@@ -44,7 +46,7 @@ import { SearchComponent } from './search/search.component';
       domain: 'dev-jrjxmhfae7ttlg5k.us.auth0.com',
       clientId: 'Qrf6s2X0Bue3LTQtv6zUNZzHo5Qc7GRZ',
       authorizationParams: {
-      redirect_uri: 'http://localhost:4200'
+      redirect_uri: 'http://localhost:4200/table'
       }
     }),
     AppRoutingModule
