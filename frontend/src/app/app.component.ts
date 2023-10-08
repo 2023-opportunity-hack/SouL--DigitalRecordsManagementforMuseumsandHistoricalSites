@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
 
   onUpload(event: FileUploadEvent) {
 
-    data = this.dataService.imageSearch(event.files[0])
+    let data = this.dataService.imageSearch(event.files[0])
     
 
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });

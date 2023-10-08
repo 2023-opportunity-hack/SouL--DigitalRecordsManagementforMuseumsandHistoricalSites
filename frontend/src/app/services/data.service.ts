@@ -105,13 +105,8 @@ export class DataService {
         reportProgress: true,
         observe: 'events'
       })
-      .subscribe((event: any) => {
-        if (event.type === HttpEventType.UploadProgress) {
-          const progress = Math.round((100 * event.loaded) / event.total);
-          console.log(`Upload progress: ${progress}%`);
-        } else if (event.type === HttpEventType.Response) {
-          console.log('File uploaded successfully');
-        }
+      .subscribe((response: any) => {
+        return response
       });
   }
 
