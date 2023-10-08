@@ -19,6 +19,7 @@ We acknowledge and prioritize tackling complex issues. Our solution does not jus
 We are inspired to build a system that will help Preservation Partners to organize and search their digital records more easily. This system will allow Preservation Partners to:
 * ***Find*** specific documents, images, audio files, video files, and other records quickly and easily.
 * ***Organize*** their records in a way that is meaningful to them and their researchers.
+
 Here are some specific examples of how this system could be used:
 * Search for all documents that mention a *specific person, event, or location* from all the documents within seconds.
 * Search for all *images and documents* related to a particular topic.
