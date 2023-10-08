@@ -17,6 +17,11 @@ export class AppComponent {
   query: string = "";
   products = this.getProductsData();
 
+  showTable = false;
+  showTableOnClick() {
+    this.showTable = true;
+  }
+
   constructor(private messageService: MessageService) {
 
   }
