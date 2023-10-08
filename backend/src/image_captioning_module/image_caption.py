@@ -9,11 +9,11 @@ image_to_text = pipeline("image-to-text", model=model_path)
 def caption(filename: str) -> str:
     # filename = os.path.join("../../", filename)
     if (not is_image_file(filename)):
-        return "Not a valid path"
+        return "Not a valid path. Image file may have been broken."
 
     result = image_to_text(filename)[0]['generated_text']
 
     return result
 
 
-# print(caption("./backend/src/image-captioning-module/test.jpg"))
+# print(caption("./backend/src/image_captioning_module/test.jpg"))
