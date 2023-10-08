@@ -23,6 +23,7 @@ export class DataService {
     }
 
     this.http.get(this.url+"search"+request).subscribe((response: any) => {
+      debugger
       return response
     })
   }

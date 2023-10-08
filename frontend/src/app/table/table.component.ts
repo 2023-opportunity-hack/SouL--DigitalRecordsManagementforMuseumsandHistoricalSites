@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import {DataService} from '../services/data.service';
+import { HttpClient, HttpEventType } from  '@angular/common/http';
 import { Router } from '@angular/router';
 
 // Import the AuthService type from the SDK
@@ -20,9 +21,10 @@ export class TableComponent implements OnInit {
   offset = 0;
   sort_by = 'rank';
   sort_order = 1;
-  filetype = 'img';
+  filetype = '';
   total_pages = 0;
   pagination_line = ""
+  url = 'http://10.159.44.185:8080/'
 
   showTable = false;
 
@@ -34,26 +36,26 @@ export class TableComponent implements OnInit {
       'filter': false
     },
     {
-      'name':'name',
+      'name':'filename',
       'label': 'Name',
       'width':'40%',
       'filter': true
     },
     {
-      'name':'type',
+      'name':'filetype',
       'label': 'Categories',
       'width':'20%',
       'filter': true
     },
     {
-      'name':'date',
+      'name':'creation_date',
       'label': 'Date',
       'width':'40%',
       'filter': false
     },
   ]
 
-  constructor(private messageService: MessageService, public dataService: DataService, public auth: AuthService, public router: Router) {}
+  constructor(public http: HttpClient, private messageService: MessageService, public dataService: DataService, public auth: AuthService, public router: Router) {}
   
   ngOnInit(): void {
   }
@@ -92,13 +94,22 @@ export class TableComponent implements OnInit {
       alert("Type query first")
       return
     }
-    let response: any = this.dataService.contextSearch(this.query, this.sort_by, this.sort_order, this.filetype);
 
-    this.limit = response['limit']
-    this.files = response['query']
-    this.total_pages = response['total_pages']
-    this.offset = response['offset']
-    this.pagination_line = "Showing page " + (this.offset/this.limit)+ " out of" + this.total_pages + " pages."
+    let request = '?'
+    if(this.query.trim().length) {
+      request = request+'query='+this.query
+      request = request+'&sort_by='+this.sort_by+'&sort_order='+this.sort_order
+    } else {
+      request = request+'sort_by='+this.sort_by+'&sort_order='+this.sort_order
+    }
+    
+    if(this.filetype.trim().length) {
+      request = request+'&filetype='+this.filetype
+    }
+
+    this.http.get(this.url+"search"+request).subscribe((response: any) => {
+      this.files = response
+    })
   }
 
   pageChange(event: any) {
