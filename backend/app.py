@@ -8,7 +8,7 @@ import os
 from fastapi import FastAPI, UploadFile, HTTPException
 from starlette.responses import FileResponse
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 app = FastAPI()
 STORAGE_DIR = './sfs/'
@@ -25,7 +25,13 @@ class SearchResponse(BaseModel):
   rank: int
 
 @app.get('/search')
-def search(query: str, limit: int=10, offset: int=0) -> List[SearchResponse]:
+def search(
+  query: str,
+  date: Optional[str]=None,
+  filetype: Optional[str]=None,
+  limit: int=10,
+  offset: int=0
+) -> List[SearchResponse]:
   # preprocess query
   query = query.strip()
   # get query embeddings
