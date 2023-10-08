@@ -22,5 +22,4 @@ input_file_path = 'test.mp4'
 output_file_path = 'out.mp3'
 
 convert_mp4_to_mp3(input_file_path, output_file_path)
-
 """
