@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from  '@angular/common/http';
+import { HttpClient, HttpEventType } from  '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  url = 'http://localhost:8080/'
+  url = 'http://10.159.44.185:8080/'
 
   constructor(private http: HttpClient) { }
 
-  contextSearch(query: string = '', limit: number, offset: number, sort_by: string, sort_order: number, filetype: string) {
+  contextSearch(query: string = '', sort_by: string, sort_order: number, filetype: string) {
     let request = '?'
     if(query.trim().length) {
       request = request+'query='+query
-      request = request+'&limit='+limit+'&offset='+offset+'&sort_by='+sort_by+'&sort_order='+sort_order
+      request = request+'&sort_by='+sort_by+'&sort_order='+sort_order
     } else {
-      request = request+'limit='+limit+'&offset='+offset+'&sort_by='+sort_by+'&sort_order='+sort_order
+      request = request+'sort_by='+sort_by+'&sort_order='+sort_order
     }
     
     if(filetype.trim().length) {
       request = request+'&filetype='+filetype
     }
 
-    return this.http.get(this.url+"search"+request).subscribe((response: any) => {
+    this.http.get(this.url+"search"+request).subscribe((response: any) => {
       return response
     })
 
@@ -96,8 +96,23 @@ export class DataService {
     return api_response
   }
 
-  imageSearch() {
+  imageSearch(file: any) {
+    debugger
+    const formData = new FormData();
+    formData.append('file', file, file.name);
 
+    this.http.post(this.url+'/uploadfile', formData, {
+        reportProgress: true,
+        observe: 'events'
+      })
+      .subscribe((event: any) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const progress = Math.round((100 * event.loaded) / event.total);
+          console.log(`Upload progress: ${progress}%`);
+        } else if (event.type === HttpEventType.Response) {
+          console.log('File uploaded successfully');
+        }
+      });
   }
 
   getFiles() {

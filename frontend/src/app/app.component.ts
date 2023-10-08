@@ -30,19 +30,19 @@ export class AppComponent implements OnInit {
       'filter': false
     },
     {
-      'name':'filename',
+      'name':'name',
       'label': 'Name',
       'width':'40%',
       'filter': true
     },
     {
-      'name':'filetype',
+      'name':'type',
       'label': 'Categories',
       'width':'20%',
       'filter': true
     },
     {
-      'name':'creation_date',
+      'name':'date',
       'label': 'Date',
       'width':'40%',
       'filter': false
@@ -74,17 +74,24 @@ export class AppComponent implements OnInit {
   }
 
   onUpload(event: FileUploadEvent) {
+
+    data = this.dataService.imageSearch(event.files[0])
+    
+
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
   };
 
   showQueryTable() {
-    debugger
     this.showTable = true;
-    let response: any = this.dataService.contextSearch(this.query, this.limit, this.offset, this.sort_by, this.sort_order, this.file_type);
-    
+    if (!this.query.trim().length) {
+      alert("Type query first")
+      return
+    }
+    let response: any = this.dataService.contextSearch(this.query, this.sort_by, this.sort_order, this.file_type);
+
     this.limit = response['limit']
-    this.total_pages = response['total_pages']
     this.files = response['query']
+    this.total_pages = response['total_pages']
     this.offset = response['offset']
     this.pagination_line = "Showing page " + (this.offset/this.limit)+ " out of" + this.total_pages + " pages."
   }
