@@ -10,10 +10,39 @@ class ElasticSearchReqDoc:
   filename: str
   chunk_id: int
   file_type: str
-  keywords: List[str]
+  #keywords: List[str]
   creation_date: str  # MM/DD/YYYY
   feat_vec: List[float]
 
+MAPPINGS = {
+  "mappings": {
+    "properties": {
+      "filename": {
+        "type": "keyword"
+      },
+      "chunkId": {
+        "type": "keyword"
+      },
+      "fileType": {
+        "type": "keyword"
+      },
+      #"keywords": {
+      #  "type": "keyword"
+      #},
+      #"location": {
+      #  "type": "geo_point"
+      #},
+      "dateCreated": {
+        "type": "date",
+        "format": "MM/dd/yyyy"
+      },
+      "vectorEmbeddings": {
+        "type": "dense_vector",
+        "dims": 768,
+      }
+    }
+  }
+}
 
 class ElasticSearchClient:
     def __init__(self, host, username, password, index_name=INDEX_NAME):
@@ -31,7 +60,7 @@ class ElasticSearchClient:
 
         # If the index does not exist, create it
         if not index_exists:
-            tmp = self.es.indices.create(index=self.index_name, ignore=400, body=None)
+            tmp = self.es.indices.create(index=self.index_name, ignore=400, body=MAPPINGS)
             print(tmp)
         else:
             print("Index already exists")
@@ -48,7 +77,7 @@ class ElasticSearchClient:
             'filename': documentObj.filename,
             'chunkId': documentObj.chunk_id,
             'fileType': documentObj.file_type,
-            'keywords': documentObj.keywords,
+            #'keywords': documentObj.keywords,
             #'location': documentObj.location,
             'dateCreated': documentObj.creation_date,
             'vectorEmbeddings': documentObj.feat_vec
@@ -97,7 +126,7 @@ class ElasticSearchClient:
     def search_filters(self,filter_field, filter_value,filter_type=None):
         query = {"query":{}}
         query["query"] = self.apply_filter(filter_field, filter_value,filter_type)
-        return self.search(self.index_name, query)
+        return self.search(query)
 
 
     def compare_vector_embeddings(self, query_vector):
@@ -118,19 +147,30 @@ class ElasticSearchClient:
         }
 
         # Execute the similarity query
-        results = self.search(index=self.index_name, body=query)
-
-        # Process and print the results
-        return results['hits']['hits']
+        results = self.search(query)
+        print(results)
+        ret = []
+        fn_set = set()
+        for res in results:
+          _src = res['_source']
+          if _src['filename'] in fn_set: continue  # TODO (rohan): in-future we will use the chunk ids for better UI
+          fn_set.add(_src['filename'])
+          ret.append({
+            'score': res['_score'],
+            'filename': _src['filename'],
+            'creation_date': _src['dateCreated'],
+            'filetype': _src['fileType'],
+          })
+        return ret
 
 
     def view_data(self):
         query = {"query": {"match_all": {}}}
-        return self.search(self.index_name, query)
+        return self.search(query)
 
     def view_top_n_items(self, n=10):
         query = {"query": {"match_all": {}}, "size": n}
-        return self.search(self.index_name, query)
+        return self.search(query)
 
 
 ES = ElasticSearchClient(URL, USER_NAME, FernetKeyManager(KEY_PATH).decrypt_password(PASSWORD))

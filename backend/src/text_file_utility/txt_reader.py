@@ -1,5 +1,5 @@
-from check_text import *
-from change_name import *
+from .check_text import *
+from .change_name import *
 import docx
 from doc2docx import convert
 

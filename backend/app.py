@@ -1,5 +1,6 @@
 # our scripts
 from src import text_vectorization
+from src import controler_main as preprocessor
 from database.elasticSearchClass import ES
 
 # 3rd-party libs
@@ -24,8 +25,8 @@ def root():
 class SearchResponse(BaseModel):
   filename: str
   rank: int
-  # date: timestamp
-  # filetype: str
+  date: str  ## MM/DD/YYYY
+  filetype: str
 
 @app.get('/search')
 def search(
@@ -43,22 +44,25 @@ def search(
   # preprocess query
   query = query.strip()
   # get query embeddings
-  query_vec = text_vectorization.vectorize(query).squeeze()
+  query_vec = text_vectorization.vectorize(query).squeeze().tolist()
   # search in elastic search > will return list of filenames
-  #result = ES.compare_query_vectors(query_vec)
+  result = ES.compare_vector_embeddings(query_vec)
+  print('='*50)
+  print(result)
+  print('='*50)
   # TODO (rohan): query postgres for metadata
   # add rank to the filenames & return
-  '''
   ret = []
-  for i, fn in enumerate(result):
+  for i, res in enumerate(result):
     ret.append({
-      'filename': fn,
-      'rank': i+1
+      'filename': res['filename'],
+      'rank': i+1,
+      'filetype': res['filetype'],
+      'creation_date': res['date']
     })
   return ret
-  '''
     
-  return [{'filename': 'hello.world', 'rank':1}]
+  #return [{'filename': 'hello.world', 'rank':1}]
 
 @app.post('/uploadfile', status_code=200)
 def upload(file: UploadFile):
@@ -66,7 +70,7 @@ def upload(file: UploadFile):
   save_fn = os.path.join(STORAGE_DIR, filename)
   if os.path.exists(save_fn): raise HTTPException(status_code=403, detail=f'\'{filename}\' already exists')
   with open(save_fn, 'wb') as f: f.write(file.file.read())
-  # TODO (rohan): trigger controller service
+  preprocessor.preprocess(save_fn)
   return {'filename': filename}
 
 @app.get('/getfile')

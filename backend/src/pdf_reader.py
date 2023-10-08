@@ -8,4 +8,5 @@ def read_pdf(filename: str) -> str:
     reader = PdfReader(filename)
     all_text = ' '.join(
         [x.strip() for page in reader.pages for x in page.extract_text().strip().split('\n') if x])
+    assert isinstance(all_text, str)
     return all_text
