@@ -1,3 +1,5 @@
 *.swp
-*.key
+sfs
 __pycache__
+node_modules
+fernetKey.key
