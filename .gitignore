@@ -3,3 +3,4 @@ sfs
 __pycache__
 node_modules
 fernetKey.key
+*.DS_Store

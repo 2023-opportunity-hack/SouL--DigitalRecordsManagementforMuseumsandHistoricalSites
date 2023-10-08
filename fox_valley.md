@@ -53,3 +53,10 @@
     - add file
     - get file
     - read file
+
+## Bugs
+- ~~".doc" file~~
+- ~~"RALwinter.JPG"~~
+- ~~add support "wpd"~~
+- ~~Thumbs.db~~
+- Error handling

@@ -101,4 +101,31 @@ export class AppComponent implements OnInit {
     this.showQueryTable();
 }
 
+downloadFile(fileName: string) {
+  // You should replace this with your actual file download logic.
+  // For demonstration purposes, we'll create a dummy download link.
+  
+  // Create an anchor element for downloading the file.
+  const link = document.createElement('a');
+  
+  // Construct the file URL or path. You should replace 'your_base_url' with the actual base URL.
+  const fileUrl = `http://10.159.44.185:8080/${fileName}`;
+  
+  // Set the anchor's href attribute to the file URL.
+  link.href = fileUrl;
+  
+  // Specify the download attribute to suggest a file name for the downloaded file.
+  link.download = fileName;
+  
+  // Trigger a click event to initiate the download.
+  link.click();
+  
+  // Cleanup: Remove the anchor element from the DOM.
+  document.body.removeChild(link);
+}
+
+
+
+
+
 }

@@ -19,7 +19,7 @@ ppt_exts = ['pptx']
 
 
 def preprocess_input_to_str(file_path: str) -> str:
-    file_ext = file_path.split('.')[-1]
+    file_ext = file_path.split('.')[-1].lower()
     if (file_ext in audio_exts):
         return transcribe(file_path)
     elif (file_ext in video_exts):
@@ -34,6 +34,9 @@ def preprocess_input_to_str(file_path: str) -> str:
         return read_text_file(file_path)
     elif (file_ext in ppt_exts):
         return pptx2text(file_path)
+    else:
+        # for all other extensions just use the filename
+        return file_path.split('/')[-1]
 
 
 def preprocess(file_path: str):
