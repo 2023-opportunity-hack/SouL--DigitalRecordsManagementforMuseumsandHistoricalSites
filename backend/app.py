@@ -8,6 +8,7 @@ import uvicorn
 import os
 
 from fastapi import FastAPI, UploadFile, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional
@@ -20,6 +21,13 @@ app = FastAPI()
 STORAGE_DIR = './sfs/'
 os.makedirs(STORAGE_DIR, exist_ok=True)
 # TODO (rohan): add CORS middleware
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=['*'],
+  allow_credentials=True,
+  allow_methods=['*'],
+  allow_headers=['*'],
+)
 
 @app.get('/')
 def root():
@@ -39,6 +47,7 @@ def search(
   query: str,
   filetype: Optional[str]=None,
   sort_by: Optional[str]=None,
+  sort_order: Optional[str]=None,
   # TODO (rohan): using limit and offset for pagination
   limit: int=10,
   offset: int=0,
@@ -103,4 +112,4 @@ def getfile(filename: str):
 
 
 if __name__ == '__main__':
-  uvicorn.run(app, port=8080, host='localhost')
+  uvicorn.run(app, port=8080, host='0.0.0.0')

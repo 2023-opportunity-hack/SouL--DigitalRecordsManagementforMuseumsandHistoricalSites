@@ -55,7 +55,8 @@
     - read file
 
 ## Bugs
-- ".doc" file
+- ~~".doc" file~~
 - ~~"RALwinter.JPG"~~
 - ~~add support "wpd"~~
 - ~~Thumbs.db~~
+- Error handling

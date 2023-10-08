@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from  '@angular/common/http';
+import { HttpClient, HttpEventType } from  '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  url = 'https://localhost'
+  url = 'http://10.159.44.185:8080/'
 
   constructor(private http: HttpClient) { }
 
-  getQueryData(query: string = '', limit: number, offset: number, sort_by: string, sort_order: string, file_type: string) {
-    let request = {
-      query: query,
-      limit: limit,
-      offset: offset,
-      sort_by: sort_by, 
-      sort_order: sort_order,
-      file_type: file_type
+  contextSearch(query: string = '', sort_by: string, sort_order: number, filetype: string) {
+    let request = '?'
+    if(query.trim().length) {
+      request = request+'query='+query
+      request = request+'&sort_by='+sort_by+'&sort_order='+sort_order
+    } else {
+      request = request+'sort_by='+sort_by+'&sort_order='+sort_order
     }
+    
+    if(filetype.trim().length) {
+      request = request+'&filetype='+filetype
+    }
+
+    this.http.get(this.url+"search"+request).subscribe((response: any) => {
+      return response
+    })
 
     let api_response  = {
       limit: 5,
@@ -86,12 +93,48 @@ export class DataService {
         },
       ]
     }
-
     return api_response
+  }
 
-    return this.http.post(this.url, request).subscribe((response: any) => {
-      return response
+  imageSearch(file: any) {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+
+    this.http.post(this.url+'/uploadfile', formData, {
+        reportProgress: true,
+        observe: 'events'
+      })
+      .subscribe((event: any) => {
+        return event
+      });
+  }
+
+  downloadFile(fileName: string) {
+    this.http.get(this.url+'getfile'+'?filename='+fileName, {responseType: 'blob' as 'json'}).subscribe((file: any) => {
+      let blob = new Blob([file], {type: file.type});
+      var downloadURL = window.URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = fileName;
+      link.click();
     })
+    // You should replace this with your actual file download logic.
+    // For demonstration purposes, we'll create a dummy download link.
+    
+    // // Create an anchor element for downloading the file.
+    // const link = document.createElement('a');
+    
+    // // Set the anchor's href attribute to the file URL.
+    // link.href = this.url+fileName;
+    
+    // // Specify the download attribute to suggest a file name for the downloaded file.
+    // link.download = fileName;
+    
+    // // Trigger a click event to initiate the download.
+    // link.click();
+    
+    // // Cleanup: Remove the anchor element from the DOM.
+    // document.body.removeChild(link);
   }
 
   getFiles() {
