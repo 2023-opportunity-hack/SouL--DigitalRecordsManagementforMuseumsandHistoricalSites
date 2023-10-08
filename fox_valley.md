@@ -39,3 +39,11 @@
 
 ## services
 [ ] Image(filename) loading service
+[ ] Storage Service
+  - get file
+  - add file
+    - hash the filename
+    - return 403 if duplicate filename exists
+    - call controller service (event trigger)
+    - return 200 if success
+  - delete file
