@@ -8,6 +8,7 @@ import uvicorn
 import os
 
 from fastapi import FastAPI, UploadFile, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional
@@ -20,6 +21,13 @@ app = FastAPI()
 STORAGE_DIR = './sfs/'
 os.makedirs(STORAGE_DIR, exist_ok=True)
 # TODO (rohan): add CORS middleware
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=['*'],
+  allow_credentials=True,
+  allow_methods=['*'],
+  allow_headers=['*'],
+)
 
 @app.get('/')
 def root():
