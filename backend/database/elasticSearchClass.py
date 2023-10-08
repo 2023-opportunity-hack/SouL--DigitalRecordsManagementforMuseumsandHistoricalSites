@@ -1,6 +1,6 @@
 # IMPORTS
-from config import INDEX_NAME, URL, USER_NAME, KEY_PATH, PASSWORD
-from fernetKeyManager import FernetKeyManager
+from .config import INDEX_NAME, URL, USER_NAME, KEY_PATH, PASSWORD
+from .fernetKeyManager import FernetKeyManager
 import time
 from dataclasses import dataclass
 from elasticsearch import Elasticsearch
