@@ -14,14 +14,14 @@
 ## Feature Extraction:
 - text:
   - Keywords using LDA
-  - BERT Feature embeddings
+  - ~~BERT Feature embeddings~~
 - image:
   - text using OCR
-  - caption using CLIP
-  - ResNet50 feature embeddings
+  - ~~caption using CLIP~~
+  - ~~ResNet50 feature embeddings~~
   - keyword tags
 - audio:
-  - speech-to-text using Whisper
+  - ~~speech-to-text using Whisper~~
   - audio embeddings?
 
 ## Search Engine Optimization (UI/UX)
@@ -36,3 +36,20 @@
   - tags (strings)
   - caption <- Thinh
   - feature vector
+
+## services
+[ ] Image(filename) loading service
+[ ] Storage Service
+  - get file
+  - add file
+    - hash the filename
+    - return 403 if duplicate filename exists
+    - call controller service (event trigger)
+    - return 200 if success
+  - delete file
+[ ] API
+  - query
+  related storage service
+    - add file
+    - get file
+    - read file
