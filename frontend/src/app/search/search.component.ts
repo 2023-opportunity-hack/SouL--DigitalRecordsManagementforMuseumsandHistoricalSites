@@ -1,31 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import {DataService} from './services/data.service';
+import {DataService} from '../services/data.service';
 import { Router } from '@angular/router';
+
 
 // Import the AuthService type from the SDK
 import { AuthService } from '@auth0/auth0-angular';
-import { FileUploadEvent } from 'primeng/fileupload';
-
 
 @Component({
-  selector: 'app-root',
-  // selector: 'app-auth-button',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [MessageService]
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss']
 })
-
-
-
-export class AppComponent implements OnInit {
-  query: string = "";
+export class SearchComponent implements OnInit {
+  query: string = ''
   files: any = [];
   limit = 10;
   offset = 0;
   sort_by = 'rank';
-  sort_order = 1;
-  file_type = 'img';
+  sort_order = 'ASC';
+  file_type = '';
   total_pages = 0;
   pagination_line = ""
 
@@ -58,7 +52,7 @@ export class AppComponent implements OnInit {
     },
   ]
 
-  constructor(private messageService: MessageService, public dataService: DataService, public auth: AuthService, public router: Router) {}
+  constructor(private messageService: MessageService, private dataService: DataService, public auth: AuthService,  public router: Router) {}
   
   ngOnInit(): void {
   }
@@ -67,9 +61,6 @@ export class AppComponent implements OnInit {
   }
 
   customSort(event: any) {
-    this.sort_by = event.field
-    this.sort_order = event.order
-    this.showQueryTable();
     event.data.sort((data1: any, data2: any) => {
       let value1 = data1[event.field];
       let value2 = data2[event.field];
@@ -85,33 +76,21 @@ export class AppComponent implements OnInit {
     })
   }
 
-  onUpload(event: FileUploadEvent) {
-    
-    let response: any = this.dataService.imageSearch(event.files[0])
+  onUpload(event: any) {
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
   };
 
-  showQueryTable() {
+  getQueryData() {
     this.showTable = true;
-    if (!this.query.trim().length) {
-      alert("Type query first")
-      return
-    }
-    let response: any = this.dataService.contextSearch(this.query, this.sort_by, this.sort_order, this.file_type);
-
+    let response: any = this.dataService.getQueryData(this.query, this.limit, this.offset, this.sort_by, this.sort_order, this.file_type);
+    
     this.limit = response['limit']
-    this.files = response['query']
     this.total_pages = response['total_pages']
+    this.files = response['query']
     this.offset = response['offset']
-    this.pagination_line = "Showing page " + (this.offset/this.limit)+ " out of" + this.total_pages + " pages."
+    this.pagination_line = (this.offset/this.limit)+ " out of" + this.total_pages + " pages."
   }
 
-  pageChange(event: any) {
-    this.offset = event.first;
-    this.limit = event.rows;
-
-    this.showQueryTable();
-}
   goToOtherComponent(): void {
     this.router.navigate(['']); // Navigate to OtherComponent
   }
