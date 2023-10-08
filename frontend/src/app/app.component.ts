@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import {DataService} from './services/data.service';
+import { FileUploadEvent } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,8 @@ export class AppComponent implements OnInit {
   file_type = '';
   total_pages = 0;
   pagination_line = ""
+
+  showTable = false;
 
   table_config = [
     {
@@ -52,6 +55,9 @@ export class AppComponent implements OnInit {
   }
 
   customSort(event: any) {
+    this.sort_by = event.field
+    this.sort_order = event.order
+    this.showQueryTable();
     event.data.sort((data1: any, data2: any) => {
       let value1 = data1[event.field];
       let value2 = data2[event.field];
@@ -67,19 +73,26 @@ export class AppComponent implements OnInit {
     })
   }
 
-  onUpload(event: any) {
+  onUpload(event: FileUploadEvent) {
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
   };
 
-  getQueryData() {
-    debugger
-    let response: any = this.dataService.getQueryData(this.query, this.limit, this.offset, this.sort_by, this.sort_order, this.file_type);
+  showQueryTable() {
+    this.showTable = true;
+    let response: any = this.dataService.contextSearch(this.query, this.limit, this.offset, this.sort_by, this.sort_order, this.file_type);
     
     this.limit = response['limit']
     this.total_pages = response['total_pages']
     this.files = response['query']
     this.offset = response['offset']
-    this.pagination_line = (this.offset/this.limit)+ " out of" + this.total_pages + " pages."
+    this.pagination_line = "Showing page " + (this.offset/this.limit)+ " out of" + this.total_pages + " pages."
   }
+
+  pageChange(event: any) {
+    this.offset = event.first;
+    this.limit = event.rows;
+
+    this.showQueryTable();
+}
 
 }
