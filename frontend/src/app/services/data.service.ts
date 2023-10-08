@@ -109,6 +109,36 @@ export class DataService {
       });
   }
 
+  downloadFile(fileName: string) {
+    this.http.get(this.url+'getfile'+'?filename='+fileName, {responseType: 'blob' as 'json'}).subscribe((file: any) => {
+      debugger
+      
+      let blob = new Blob([file], {type: file.type});
+      var downloadURL = window.URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = fileName;
+      link.click();
+    })
+    // You should replace this with your actual file download logic.
+    // For demonstration purposes, we'll create a dummy download link.
+    
+    // // Create an anchor element for downloading the file.
+    // const link = document.createElement('a');
+    
+    // // Set the anchor's href attribute to the file URL.
+    // link.href = this.url+fileName;
+    
+    // // Specify the download attribute to suggest a file name for the downloaded file.
+    // link.download = fileName;
+    
+    // // Trigger a click event to initiate the download.
+    // link.click();
+    
+    // // Cleanup: Remove the anchor element from the DOM.
+    // document.body.removeChild(link);
+  }
+
   getFiles() {
     query: [
       {
