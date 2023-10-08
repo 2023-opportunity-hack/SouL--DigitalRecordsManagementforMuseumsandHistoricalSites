@@ -12,7 +12,11 @@ from starlette.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional
 
+# TODO (rohan): add constants to one file
+# TODO (rohan): use a debug var
 app = FastAPI()
+
+# filesystem where we dump the object files
 STORAGE_DIR = './sfs/'
 os.makedirs(STORAGE_DIR, exist_ok=True)
 # TODO (rohan): add CORS middleware
@@ -28,11 +32,14 @@ class SearchResponse(BaseModel):
   creation_date: str  ## MM/DD/YYYY
   filetype: str
 
+# TODO (rohan): REDIS caching
+
 @app.get('/search')
 def search(
   query: str,
   filetype: Optional[str]=None,
   sort_by: Optional[str]=None,
+  # TODO (rohan): using limit and offset for pagination
   limit: int=10,
   offset: int=0,
   # TODO (rohan)
@@ -47,9 +54,6 @@ def search(
   query_vec = text_vectorization.vectorize(query).squeeze().tolist()
   # search in elastic search > will return list of filenames
   result = ES.compare_vector_embeddings(query_vec)
-  print('='*50)
-  print(result)
-  print('='*50)
   # TODO (rohan): query postgres for metadata
   # add rank to the filenames & return
   ret = []
@@ -88,7 +92,9 @@ def getfile(filename: str):
   elif file_ext in video_exts: media_type = 'video/mp4'
   elif file_ext in audio_exts: media_type = f'audio/mp3'
   elif file_ext in img_exts: media_type = f'image/jpeg'
-  else: raise NotImplementedError(f'\'{file_ext}\' extension media type not implemented')
+  else:
+    media_type = 'application/octet-stream'
+    #raise NotImplementedError(f'\'{file_ext}\' extension media type not implemented')
 
   # TODO (rohan): streaming response
   return FileResponse(save_fn, media_type=media_type, filename=filename)

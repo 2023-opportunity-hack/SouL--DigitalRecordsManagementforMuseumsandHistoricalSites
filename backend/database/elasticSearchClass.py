@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from elasticsearch import Elasticsearch
 from typing import List
 
+# TODO (rohan): clean up unwanted funcs
+
 # ENTITY CLASSS
 @dataclass
 class ElasticSearchReqDoc:

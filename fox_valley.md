@@ -56,8 +56,6 @@
 
 ## Bugs
 - ".doc" file
-- "RALwinter.JPG
-- SIGNIFICANT BUILDINGS.doc
-- VillaGarden.1pghistory.doc
-- add support "wpd"
-- Thumbs.db
+- ~~"RALwinter.JPG"~~
+- ~~add support "wpd"~~
+- ~~Thumbs.db~~

@@ -2,6 +2,7 @@ from .check_text import *
 from .change_name import *
 import docx
 from doc2docx import convert
+import antiword
 
 
 def read_text_file(file_path: str) -> str:
@@ -18,10 +19,11 @@ def read_text_file(file_path: str) -> str:
         return read_docx(file_path)
 
     elif file_extension.lower() == '.doc':
-        doc2docx(file_path)
+        new_filepath = doc2docx(file_path)
         os.remove(file_path)
-        file_path = file_path[:len(file_path) - 3] + 'docx'
-        return read_docx(file_path)
+        #file_path = file_path[:len(file_path) - 3] + 'docx'
+        print(f'reading docx file from \'{new_filepath}\'')
+        return read_docx(new_filepath)
 
 
 def read_docx(file_path: str) -> str:
@@ -33,7 +35,12 @@ def read_docx(file_path: str) -> str:
 
 
 def doc2docx(file_path: str):
-    convert(file_path, file_path[:len(file_path) - 3] + 'docx')
+    new_filepath = file_path[:len(file_path) - 3] + 'docx'
+    print(f'converting \'{file_path}\' to \'{new_filepath}\'')
+    #tmp = convert(file_path, new_filepath)
+    #tmp = 
+    print(f'convert in doc2docx returned: {tmp}')
+    return new_filepath
 
 
 # print(read_file("backend/src/text-file-utility/test1.doc"))

@@ -1,6 +1,7 @@
 import imghdr
 import os
 
+# TODO (rohan): merge all audio extensions into one
 
 def is_image_file(file_path):
     # Check if the file exists
@@ -16,4 +17,5 @@ def is_image_file(file_path):
     valid_extensions = ['rgb', 'gif', 'pbm', 'pgm', 'ppm', 'tiff',
                         'rast', 'xbm', 'jpeg', 'bmp', 'png', 'webp', 'exr', 'jpg']
 
-    return image_type is not None and image_type in valid_extensions
+    print(f'image type is: {image_type}')
+    return image_type is not None and image_type.lower() in valid_extensions
