@@ -15,8 +15,8 @@ export class AppComponent implements OnInit {
   limit = 10;
   offset = 0;
   sort_by = 'rank';
-  sort_order = 'ASC';
-  file_type = '';
+  sort_order = 1;
+  file_type = 'img';
   total_pages = 0;
   pagination_line = ""
 
@@ -78,6 +78,7 @@ export class AppComponent implements OnInit {
   };
 
   showQueryTable() {
+    debugger
     this.showTable = true;
     let response: any = this.dataService.contextSearch(this.query, this.limit, this.offset, this.sort_by, this.sort_order, this.file_type);
     

@@ -5,21 +5,24 @@ import { HttpClient } from  '@angular/common/http';
   providedIn: 'root'
 })
 export class DataService {
-  url = 'https://localhost:8080/'
+  url = 'http://localhost:8080/'
 
   constructor(private http: HttpClient) { }
 
-  contextSearch(query: string = '', limit: number, offset: number, sort_by: string, sort_order: string, file_type: string) {
-    let request = {
-      query: query,
-      limit: limit,
-      offset: offset,
-      sort_by: sort_by, 
-      sort_order: sort_order,
-      file_type: file_type
+  contextSearch(query: string = '', limit: number, offset: number, sort_by: string, sort_order: number, filetype: string) {
+    let request = '?'
+    if(query.trim().length) {
+      request = request+'query='+query
+      request = request+'&limit='+limit+'&offset='+offset+'&sort_by='+sort_by+'&sort_order='+sort_order
+    } else {
+      request = request+'limit='+limit+'&offset='+offset+'&sort_by='+sort_by+'&sort_order='+sort_order
+    }
+    
+    if(filetype.trim().length) {
+      request = request+'&filetype='+filetype
     }
 
-    return this.http.post(this.url+"search", request).subscribe((response: any) => {
+    return this.http.get(this.url+"search"+request).subscribe((response: any) => {
       return response
     })
 
