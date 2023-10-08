@@ -12,29 +12,47 @@
         <p-toast></p-toast>
   </div>
 
-  <div class="card">
-    <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
-    [value]="products"
-    [paginator]="true"
-    [rows]="10"
-    [showCurrentPageReport]="true"
-    [tableStyle]="{ 'min-width': '50rem' }"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [rowsPerPageOptions]="[10,20,30]">
+    <div class="card">
+    <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[5,10,20]"
+        (sortFunction)="customSort($event)" [customSort]="true">
         <ng-template pTemplate="header">
             <tr>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Quantity</th>
+                <th pSortableColumn="code" style="width:20%">Code <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name" style="width:20%">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="category" style="width:20%">Category <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="quantity" style="width:20%">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+                <th pSortableColumn="price" style="width:20%">Price <p-sortIcon field="price"></p-sortIcon></th>
+            </tr>
+            <tr>
+                <th>
+                    <p-columnFilter type="text" field="code"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="name"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="category"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="quantity"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="price"></p-columnFilter>
+                </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                <td>{{ product.code }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.quantity }}</td>
+                <td>{{product.code}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.price | currency: 'USD'}}</td>
             </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">
@@ -44,5 +62,5 @@
             <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
         </ng-template>
     </p-table>
-</div>
+    </div>
 </div>

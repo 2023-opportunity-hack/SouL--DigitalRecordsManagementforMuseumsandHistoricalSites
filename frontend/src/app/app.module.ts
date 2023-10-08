@@ -22,9 +22,11 @@ import { AppComponent } from './app.component';
     FileUploadModule,
     ToastModule,
     PaginatorModule,
-    ButtonModule
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+
+export class AppModule { 
+}
