@@ -97,7 +97,6 @@ export class DataService {
   }
 
   imageSearch(file: any) {
-    debugger
     const formData = new FormData();
     formData.append('file', file, file.name);
 
@@ -105,8 +104,8 @@ export class DataService {
         reportProgress: true,
         observe: 'events'
       })
-      .subscribe((response: any) => {
-        return response
+      .subscribe((event: any) => {
+        return event
       });
   }
 

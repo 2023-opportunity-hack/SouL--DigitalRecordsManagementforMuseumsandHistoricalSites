@@ -10,7 +10,7 @@
                     <input type="text" pInputText [(ngModel)]="query" class="larger-input" placeholder="Type here..." style="width: 600px; padding: 16px; margin-right: 30px;" />
                 </span>
             <p-button  class="ms-3 large-button" label="Soul Search" (click)="showQueryTable()"></p-button>
-            <p-fileUpload class="ms-3" mode="basic" chooseLabel="Soul Lens" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php"
+            <p-fileUpload class="ms-3" mode="basic" chooseLabel="Upload file" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php"
               accept="image/*" (onUpload)="onUpload($event)" [auto]="true"></p-fileUpload>
         
             <p-toast></p-toast>
