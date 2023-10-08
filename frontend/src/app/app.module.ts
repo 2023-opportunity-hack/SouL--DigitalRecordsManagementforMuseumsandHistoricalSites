@@ -8,6 +8,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import { HttpClientModule } from  '@angular/common/http';
+// import { MultiSelectModule } from 'primeng/multiselect';
 
 import { AppComponent } from './app.component';
 
@@ -24,7 +26,8 @@ import { AppComponent } from './app.component';
     ToastModule,
     PaginatorModule,
     ButtonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
