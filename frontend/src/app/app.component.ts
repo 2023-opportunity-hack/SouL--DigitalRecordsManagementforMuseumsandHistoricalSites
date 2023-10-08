@@ -20,9 +20,6 @@ export class AppComponent implements OnInit {
   pagination_line = ""
 
   showTable = false;
-  showTableOnClick() {
-    this.showTable = true;
-  }
 
   table_config = [
     {
@@ -77,7 +74,7 @@ export class AppComponent implements OnInit {
   };
 
   getQueryData() {
-    debugger
+    this.showTable = true;
     let response: any = this.dataService.getQueryData(this.query, this.limit, this.offset, this.sort_by, this.sort_order, this.file_type);
     
     this.limit = response['limit']
