@@ -53,3 +53,11 @@
     - add file
     - get file
     - read file
+
+## Bugs
+- ".doc" file
+- "RALwinter.JPG
+- SIGNIFICANT BUILDINGS.doc
+- VillaGarden.1pghistory.doc
+- add support "wpd"
+- Thumbs.db
