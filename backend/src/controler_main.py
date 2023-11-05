@@ -40,29 +40,30 @@ def preprocess_input_to_str(file_path: str) -> str:
 
 
 def preprocess(file_path: str):
-    data = preprocess_input_to_str(file_path)
-    if isinstance(data, list): data = ' '.join(
-      (x for x in data if x)
-    )
-    elif not isinstance(data, str): print(type(data))
+    try:
+        data = preprocess_input_to_str(file_path)
+        if isinstance(data, list): data = ' '.join(
+            (x for x in data if x)
+        )
+        elif not isinstance(data, str): print(type(data))
 
-    tokenized_sentences = sent_tokenize(data, language='english')
-    chunks = []
-    for i in range(0, len(tokenized_sentences), 3):
-        chunks.append(' '.join(tokenized_sentences[i:i+3]))
+        tokenized_sentences = sent_tokenize(data, language='english')
+        chunks = []
+        for i in range(0, len(tokenized_sentences), 3):
+            chunks.append(' '.join(tokenized_sentences[i:i+3]))
 
-    # store in ES
+        # store in ES
 
-    fn = file_path.split('/')[-1]
-    file_ext = file_path.split('.')[-1]
-    for i, chunk in enumerate(chunks):
-      doc = ElasticSearchReqDoc(
-        filename=fn,
-        chunk_id=i,
-        file_type=file_ext,
-        #keywords=[''],
-        creation_date='10/07/2023',
-        feat_vec=vectorize(chunk).squeeze().tolist(),
-      )
-      ES.insert_document(doc)
-    return None
+        fn = file_path.split('/')[-1]
+        file_ext = file_path.split('.')[-1]
+        for i, chunk in enumerate(chunks):
+            doc = ElasticSearchReqDoc(
+                filename=file_path,
+                chunk_id=i,
+                file_type=file_ext,
+                #keywords=[''],
+                creation_date='10/07/2023',
+                feat_vec=vectorize(chunk).squeeze().tolist(),
+            )
+        ES.insert_document(doc)
+    except Exception as e: print(str(e))

@@ -4,7 +4,7 @@ import torch
 torch.set_grad_enabled(False)
 
 
-model_path = '/Users/rohan/3_Resources/ai_models/all-mpnet-base-v2'
+model_path = 'sentence-transformers/all-mpnet-base-v2'
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModel.from_pretrained(model_path)
 model.eval()

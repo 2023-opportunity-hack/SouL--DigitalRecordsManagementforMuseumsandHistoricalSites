@@ -12,6 +12,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 
 # TODO (rohan): add constants to one file
 # TODO (rohan): use a debug var
@@ -111,5 +113,24 @@ def getfile(filename: str):
 # TODO (rohan): delete file
 
 
+# index a directory
+def index_(dir_path: str):
+  for root, dirs, files in os.walk(dir_path):
+    for file in files:
+      file_path = os.path.join(root, file)
+      preprocessor.preprocess(file_path)
+
+class FilePreprocessHandler(FileSystemEventHandler):
+  def on_created(self, event):
+    if not event.is_directory:
+      try: preprocessor.preprocess(event.src_path)
+      except Exception as e: print(str(e))
+
+
 if __name__ == '__main__':
+  index_(STORAGE_DIR)
+  event_hndlr = FilePreprocessHandler()
+  observer = Observer()
+  observer.schedule(event_hndlr, STORAGE_DIR, recursive=True)
+  observer.start()
   uvicorn.run(app, port=8080, host='0.0.0.0')
