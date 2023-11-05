@@ -129,11 +129,11 @@ export class TableComponent implements OnInit {
       request = request + '&filetype=' + this.filetype;
     }
 
-    // this.files = this.dataService.getFiles();
+    this.files = this.dataService.getFiles();
 
-    this.http.get(this.url + 'search' + request).subscribe((response: any) => {
-      this.files = response;
-    });
+    // this.http.get(this.url + 'search' + request).subscribe((response: any) => {
+    //   this.files = response;
+    // });
   }
 
   pageChange(event: any) {
@@ -147,15 +147,22 @@ export class TableComponent implements OnInit {
   }
 
   openDialog(filename: string) {
-    const dialogRef = this.dialog.open(ViewerComponent, {
-      width: '250px',
-      data: {filename: filename}
-    });
+    window.open(filename, "_blank");
+    
+    // const dialogRef = this.dialog.open(ViewerComponent, {
+    //   width: '250px',
+    //   autoFocus: true,
+    //   position: {
+    //     top: '10px',
+    //     left: '25%'
+    //   },
+    //   data: filename
+    // });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   // this.animal = result;
+    // });
   }
 }
 
