@@ -64,11 +64,8 @@ class ElasticSearchClient:
         index_exists = self.es.indices.exists(index=self.index_name)
 
         # If the index does not exist, create it using the defined mappings
-        if not index_exists:
-            self.es.indices.create(index=self.index_name, ignore=400, body=MAPPINGS)
-        else:
-            print("Index already exists")
-        
+        if index_exists: self.es.indices.delete(index=self.index_name)
+        self.es.indices.create(index=self.index_name, ignore=400, body=MAPPINGS)
         print(self.get_time_elapsed(start_time, "Creating Index"))
 
     def insert_document(self, documentObj: ElasticSearchReqDoc):

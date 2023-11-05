@@ -38,7 +38,7 @@ export class DataService {
           rank: 1
         },
         {
-          date: 'Thu Apr 22 11:43:50 2010',
+          date: 'Thu Apr 22 11:43:50 2010', 
           name: 'Beith.kids.arch.jpg',
           type: 'jpg',
           rank: 2
