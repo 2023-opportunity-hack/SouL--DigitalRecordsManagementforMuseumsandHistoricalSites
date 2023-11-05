@@ -23,6 +23,7 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { LoginComponent } from './login/login.component';
 import { TableComponent } from './table/table.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ViewerComponent } from './viewer/viewer.component';
 // import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     LoginComponent,
     TableComponent,
     HomepageComponent,
+    ViewerComponent,
     // AuthComponent
   ],
   imports: [
