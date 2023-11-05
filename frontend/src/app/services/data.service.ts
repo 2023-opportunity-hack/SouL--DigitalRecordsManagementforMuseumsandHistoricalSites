@@ -26,74 +26,74 @@ export class DataService {
     //   return response
     // })
 
-    let api_response  = {
-      limit: 5,
-      offset: 10,
-      total_pages: 7,
-      query: [
-        {
-          date: 'Tue Oct 11 07:16:14 2011',
-          name: 'Carlson.Anderson.acq0001.jpg',
-          type: 'jpg',
-          rank: 1
-        },
-        {
-          date: 'Thu Apr 22 11:43:50 2010', 
-          name: 'Beith.kids.arch.jpg',
-          type: 'jpg',
-          rank: 2
-        },
-        {
-          date: 'Mon Jan 18 11:24:16 2021',
-          name: 'Kobayashi Video Final.mp4',
-          type: 'mp4',
-          rank: 3
-        },
-        {
-          date: 'Tue Mar 16 11:57:42 2004',
-          name: 'alligator pit.jpg',
-          type: 'jpg',
-          rank: 4
-        },
-        {
-          date: 'Tue Oct  3 12:05:46 2023',
-          name: 'Screenshot 2023-10-03 140547.png',
-          type: 'png',
-          rank: 5
-        },
-        {
-          date: 'Thu Mar  6 13:12:28 2014',
-          name: 'VillaGarden.1pghistory.doc',
-          type: 'doc',
-          rank: 6
-        },
-        {
-          date: 'Tue Jul 25 14:37:18 2023',
-          name: 'Shakespeare_trial_1916.jpg',
-          type: 'jpg',
-          rank: 7
-        },
-        {
-          date: 'Mon Apr 18 11:26:26 2011',
-          name: 'Leverty.coll.Villagate.jpg',
-          type: 'jpg',
-          rank: 8
-        },
-        {
-          date: 'Mon Jun 18 11:12:38 2012',
-          name: '2012.kidsdaypgm.bkmk.doc',
-          type: 'doc',
-          rank: 9
-        },
-        {
-          date: 'Wed Aug 25 09:52:18 2004',
-          name: 'cutiepie.jpg',
-          type: 'jpg',
-          rank: 10
-        },
-      ]
-    }
-    return api_response
+    // let api_response  = {
+    //   limit: 5,
+    //   offset: 10,
+    //   total_pages: 7,
+    //   query: [
+    //     {
+    //       date: 'Tue Oct 11 07:16:14 2011',
+    //       name: 'Carlson.Anderson.acq0001.jpg',
+    //       type: 'jpg',
+    //       rank: 1
+    //     },
+    //     {
+    //       date: 'Thu Apr 22 11:43:50 2010',
+    //       name: 'Beith.kids.arch.jpg',
+    //       type: 'jpg',
+    //       rank: 2
+    //     },
+    //     {
+    //       date: 'Mon Jan 18 11:24:16 2021',
+    //       name: 'Kobayashi Video Final.mp4',
+    //       type: 'mp4',
+    //       rank: 3
+    //     },
+    //     {
+    //       date: 'Tue Mar 16 11:57:42 2004',
+    //       name: 'alligator pit.jpg',
+    //       type: 'jpg',
+    //       rank: 4
+    //     },
+    //     {
+    //       date: 'Tue Oct  3 12:05:46 2023',
+    //       name: 'Screenshot 2023-10-03 140547.png',
+    //       type: 'png',
+    //       rank: 5
+    //     },
+    //     {
+    //       date: 'Thu Mar  6 13:12:28 2014',
+    //       name: 'VillaGarden.1pghistory.doc',
+    //       type: 'doc',
+    //       rank: 6
+    //     },
+    //     {
+    //       date: 'Tue Jul 25 14:37:18 2023',
+    //       name: 'Shakespeare_trial_1916.jpg',
+    //       type: 'jpg',
+    //       rank: 7
+    //     },
+    //     {
+    //       date: 'Mon Apr 18 11:26:26 2011',
+    //       name: 'Leverty.coll.Villagate.jpg',
+    //       type: 'jpg',
+    //       rank: 8
+    //     },
+    //     {
+    //       date: 'Mon Jun 18 11:12:38 2012',
+    //       name: '2012.kidsdaypgm.bkmk.doc',
+    //       type: 'doc',
+    //       rank: 9
+    //     },
+    //     {
+    //       date: 'Wed Aug 25 09:52:18 2004',
+    //       name: 'cutiepie.jpg',
+    //       type: 'jpg',
+    //       rank: 10
+    //     },
+    //   ]
+    // }
+    // return api_response
   }
 
   imageSearch(file: any) {
@@ -146,165 +146,165 @@ export class DataService {
         rank: '1'
       },
       {
-        date: 'Thu Apr 22 11:43:50 2010',
-        name: 'Beith.kids.arch.jpg',
-        type: 'jpg',
+        creation_date: 'Thu Apr 22 11:43:50 2010',
+        filename: 'Beith.kids.arch.jpg',
+        filetype: 'jpg',
         rank: '2'
       },
       {
-        date: 'Mon Jan 18 11:24:16 2021',
-        name: 'Kobayashi Video Final.mp4',
-        type: 'mp4',
+        creation_date: 'Mon Jan 18 11:24:16 2021',
+        filename: 'Kobayashi Video Final.mp4',
+        filetype: 'mp4',
         rank: '3'
       },
       {
-        date: 'Tue Mar 16 11:57:42 2004',
-        name: 'alligator pit.jpg',
-        type: 'jpg',
+        creation_date: 'Tue Mar 16 11:57:42 2004',
+        filename: 'alligator pit.jpg',
+        filetype: 'jpg',
         rank: '4'
       },
       {
-        date: 'Tue Oct  3 12:05:46 2023',
-        name: 'Screenshot 2023-10-03 140547.png',
-        type: 'png',
+        creation_date: 'Tue Oct  3 12:05:46 2023',
+        filename: 'Screenshot 2023-10-03 140547.png',
+        filetype: 'png',
         rank: '5'
       },
       {
-        date: 'Thu Mar  6 13:12:28 2014',
-        name: 'VillaGarden.1pghistory.doc',
-        type: 'doc',
+        creation_date: 'Thu Mar  6 13:12:28 2014',
+        filename: 'VillaGarden.1pghistory.doc',
+        filetype: 'doc',
         rank: '6'
       },
       {
-        date: 'Tue Jul 25 14:37:18 2023',
-        name: 'Shakespeare_trial_1916.jpg',
-        type: 'jpg',
+        creation_date: 'Tue Jul 25 14:37:18 2023',
+        filename: 'Shakespeare_trial_1916.jpg',
+        filetype: 'jpg',
         rank: '7'
       },
       {
-        date: 'Mon Apr 18 11:26:26 2011',
-        name: 'Leverty.coll.Villagate.jpg',
-        type: 'jpg',
+        creation_date: 'Mon Apr 18 11:26:26 2011',
+        filename: 'Leverty.coll.Villagate.jpg',
+        filetype: 'jpg',
         rank: '8'
       },
       {
-        date: 'Mon Jun 18 11:12:38 2012',
-        name: '2012.kidsdaypgm.bkmk.doc',
-        type: 'doc',
+        creation_date: 'Mon Jun 18 11:12:38 2012',
+        filename: '2012.kidsdaypgm.bkmk.doc',
+        filetype: 'doc',
         rank: '9'
       },
       {
-        date: 'Wed Aug 25 09:52:18 2004',
-        name: 'cutiepie.jpg',
-        type: 'jpg',
+        creation_date: 'Wed Aug 25 09:52:18 2004',
+        filename: 'cutiepie.jpg',
+        filetype: 'jpg',
         rank: '10'
       },
       {
-        date: 'Tue Jun 13 09:06:48 2000',
-        name: 'SIGNIFICANT BUILDINGS.doc',
-        type: 'doc',
+        creation_date: 'Tue Jun 13 09:06:48 2000',
+        filename: 'SIGNIFICANT BUILDINGS.doc',
+        filetype: 'doc',
         rank: '11'
       },
       {
-        date: 'Tue Oct  3 12:06:02 2023',
-        name: 'Screenshot 2023-10-03 140603.png',
-        type: 'png',
+        creation_date: 'Tue Oct  3 12:06:02 2023',
+        filename: 'Screenshot 2023-10-03 140603.png',
+        filetype: 'png',
         rank: '12'
       },
       {
-        date: 'Thu Jun  7 10:10:34 2007',
-        name: 'RALwinter.jpg',
-        type: 'jpg',
+        creation_date: 'Thu Jun  7 10:10:34 2007',
+        filename: 'RALwinter.jpg',
+        filetype: 'jpg',
         rank: '13'
       },
       {
-        date: 'Tue Jun 20 10:54:38 2023',
-        name: 'Cryptanalyst in Chief Elizebeth Smith Friedman.pptx',
-        type: 'pptx',
+        creation_date: 'Tue Jun 20 10:54:38 2023',
+        filename: 'Cryptanalyst in Chief Elizebeth Smith Friedman.pptx',
+        filetype: 'pptx',
         rank: '14'
       },
       {
-        date: 'Thu Jun 20 08:00:04 2013',
-        name: 'Villa.Storrer.bsmt.res.jpg',
-        type: 'jpg',
+        creation_date: 'Thu Jun 20 08:00:04 2013',
+        filename: 'Villa.Storrer.bsmt.res.jpg',
+        filetype: 'jpg',
         rank: '15'
       },
       {
-        date: 'Mon Feb 11 09:47:26 2013',
-        name: 'Villa.before.ext.rest/scan0007.jpg',
-        type: 'jpg',
+        creation_date: 'Mon Feb 11 09:47:26 2013',
+        filename: 'Villa.before.ext.rest/scan0007.jpg',
+        filetype: 'jpg',
         rank: '16'
       },
       {
-        date: 'Wed Feb 16 08:25:26 2005',
-        name: 'Villa.before.ext.rest/Exterior Restoration of the Fabyan Villa Museum.doc',
-        type: 'doc',
+        creation_date: 'Wed Feb 16 08:25:26 2005',
+        filename: 'Villa.before.ext.rest/Exterior Restoration of the Fabyan Villa Museum.doc',
+        filetype: 'doc',
         rank: '17'
       },
       {
-        date: 'Thu Sep 21 12:29:46 2023',
-        name: 'Villa.before.ext.rest/Thumbs.db',
-        type: 'db',
+        creation_date: 'Thu Sep 21 12:29:46 2023',
+        filename: 'Villa.before.ext.rest/Thumbs.db',
+        filetype: 'db',
         rank: '18'
       },
       {
-        date: 'Wed Jul 18 09:52:56 2007',
-        name: 'Villa.before.ext.rest/199601054.jpg',
-        type: 'jpg',
+        creation_date: 'Wed Jul 18 09:52:56 2007',
+        filename: 'Villa.before.ext.rest/199601054.jpg',
+        filetype: 'jpg',
         rank: '19'
       },
       {
-        date: 'Mon Feb 11 09:48:06 2013',
-        name: 'Villa.before.ext.rest/scan0008.jpg',
-        type: 'jpg',
+        creation_date: 'Mon Feb 11 09:48:06 2013',
+        filename: 'Villa.before.ext.rest/scan0008.jpg',
+        filetype: 'jpg',
         rank: '20'
       },
       {
-        date: 'Thu Apr 26 10:03:02 2012',
-        name: 'scan0008.jpg',
-        type: 'jpg',
+        creation_date: 'Thu Apr 26 10:03:02 2012',
+        filename: 'scan0008.jpg',
+        filetype: 'jpg',
         rank: '21'
       },
       {
-        date: 'Thu Apr 25 11:35:54 2019',
-        name: '20190501_FPDKC Meeting_AGENDA.docx',
-        type: 'docx',
+        creation_date: 'Thu Apr 25 11:35:54 2019',
+        filename: '20190501_FPDKC Meeting_AGENDA.docx',
+        filetype: 'docx',
         rank: '22'
       },
       {
-        date: 'Mon Feb 22 11:38:00 2016',
-        name: 'broc.map.label.1.jpg',
-        type: 'jpg',
+        creation_date: 'Mon Feb 22 11:38:00 2016',
+        filename: 'broc.map.label.1.jpg',
+        filetype: 'jpg',
         rank: '23'
       },
       {
-        date: 'Mon Jul 25 10:32:50 2005',
-        name: 'wm, lyla, kids award 021.jpg',
-        type: 'jpg',
+        creation_date: 'Mon Jul 25 10:32:50 2005',
+        filename: 'wm, lyla, kids award 021.jpg',
+        filetype: 'jpg',
         rank: '24'
       },
       {
-        date: 'Tue Oct  3 12:06:38 2023',
-        name: 'Screenshot 2023-10-03 140638.png',
-        type: 'png',
+        creation_date: 'Tue Oct  3 12:06:38 2023',
+        filename: 'Screenshot 2023-10-03 140638.png',
+        filetype: 'png',
         rank: '25'
       },
       {
-        date: 'Mon May 16 19:14:14 2022',
-        name: 'Villa Window Earring SVG PNG.png',
-        type: 'png',
+        creation_date: 'Mon May 16 19:14:14 2022',
+        filename: 'Villa Window Earring SVG PNG.png',
+        filetype: 'png',
         rank: '26'
       },
       {
-        date: 'Wed Oct  1 11:32:58 2008',
-        name: 'windmill.historypage.wpd',
-        type: 'wpd',
+        creation_date: 'Wed Oct  1 11:32:58 2008',
+        filename: 'windmill.historypage.wpd',
+        filetype: 'wpd',
         rank: '27'
       },
       {
-        date: 'Wed Aug 29 09:37:34 2007',
-        name: 'wrightwkendpr.doc',
-        type: 'doc',
+        creation_date: 'Wed Aug 29 09:37:34 2007',
+        filename: 'wrightwkendpr.doc',
+        filetype: 'doc',
         rank: '28'
       }
     ]

@@ -3,10 +3,12 @@ import { MessageService } from 'primeng/api';
 import { DataService } from '../services/data.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Router,ActivatedRoute } from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 // Import the AuthService type from the SDK
 import { AuthService } from '@auth0/auth0-angular';
 import { FileUploadEvent } from 'primeng/fileupload';
+import { ViewerComponent } from '../viewer/viewer.component';
 
 @Component({
   selector: 'app-table',
@@ -60,7 +62,8 @@ export class TableComponent implements OnInit {
     public dataService: DataService,
     public auth: AuthService,
     public router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -142,4 +145,17 @@ export class TableComponent implements OnInit {
   goToOtherComponent(): void {
     this.router.navigate(['']); // Navigate to OtherComponent
   }
+
+  openDialog(filename: string) {
+    const dialogRef = this.dialog.open(ViewerComponent, {
+      width: '250px',
+      data: {filename: filename}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
 }
+

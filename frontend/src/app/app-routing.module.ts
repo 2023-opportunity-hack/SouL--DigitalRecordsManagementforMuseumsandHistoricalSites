@@ -5,7 +5,7 @@ import { TableComponent } from './table/table.component';
 import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent},
+  { path: '', component: HomepageComponent},
   { path: 'table', component: TableComponent}, // Default route
   { path: 'login', component: LoginComponent }, // Route to LoginComponent
   { path: 'search', component: HomepageComponent }, // Route to LoginComponent
