@@ -1,0 +1,8 @@
+<div class="container-fluid text-center mt-3 pt-5">
+    <div class="gradient">
+    </div>
+    <h1 class="mt-5 title">SouL Search</h1>
+    <form [formGroup]="queryForm" (submit)="onSubmit()">
+        <input class="input-field" formControlName="query" type="text" pInputText placeholder="Search anything..."/>
+    </form>
+</div>

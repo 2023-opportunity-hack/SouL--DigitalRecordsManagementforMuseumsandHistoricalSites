@@ -6,6 +6,21 @@
 
 
 .zoom:hover {
-    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-    box-shadow: 0px 0px 20px 0px #aaaaaa;
-  }
+  transform: scale(1.1);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  box-shadow: 0px 0px 20px 0px #aaaaaa;
+}
+
+.input-field {
+  width: 600px;
+  border-radius: 50px;
+  border-width: 2px;
+  border-left-color: hsl(158, 82, 57, 85%);
+  border-bottom-color: hsl(158, 82, 57, 85%);
+  border-right-color: hsl(252, 82, 57);
+  border-top-color: hsl(252, 82, 57);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

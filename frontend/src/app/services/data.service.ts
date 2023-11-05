@@ -22,10 +22,78 @@ export class DataService {
       request = request+'&filetype='+filetype
     }
 
-    this.http.get(this.url+"search"+request).subscribe((response: any) => {
-      debugger
-      return response
-    })
+    // this.http.get(this.url+"search"+request).subscribe((response: any) => {
+    //   return response
+    // })
+
+    let api_response  = {
+      limit: 5,
+      offset: 10,
+      total_pages: 7,
+      query: [
+        {
+          date: 'Tue Oct 11 07:16:14 2011',
+          name: 'Carlson.Anderson.acq0001.jpg',
+          type: 'jpg',
+          rank: 1
+        },
+        {
+          date: 'Thu Apr 22 11:43:50 2010',
+          name: 'Beith.kids.arch.jpg',
+          type: 'jpg',
+          rank: 2
+        },
+        {
+          date: 'Mon Jan 18 11:24:16 2021',
+          name: 'Kobayashi Video Final.mp4',
+          type: 'mp4',
+          rank: 3
+        },
+        {
+          date: 'Tue Mar 16 11:57:42 2004',
+          name: 'alligator pit.jpg',
+          type: 'jpg',
+          rank: 4
+        },
+        {
+          date: 'Tue Oct  3 12:05:46 2023',
+          name: 'Screenshot 2023-10-03 140547.png',
+          type: 'png',
+          rank: 5
+        },
+        {
+          date: 'Thu Mar  6 13:12:28 2014',
+          name: 'VillaGarden.1pghistory.doc',
+          type: 'doc',
+          rank: 6
+        },
+        {
+          date: 'Tue Jul 25 14:37:18 2023',
+          name: 'Shakespeare_trial_1916.jpg',
+          type: 'jpg',
+          rank: 7
+        },
+        {
+          date: 'Mon Apr 18 11:26:26 2011',
+          name: 'Leverty.coll.Villagate.jpg',
+          type: 'jpg',
+          rank: 8
+        },
+        {
+          date: 'Mon Jun 18 11:12:38 2012',
+          name: '2012.kidsdaypgm.bkmk.doc',
+          type: 'doc',
+          rank: 9
+        },
+        {
+          date: 'Wed Aug 25 09:52:18 2004',
+          name: 'cutiepie.jpg',
+          type: 'jpg',
+          rank: 10
+        },
+      ]
+    }
+    return api_response
   }
 
   imageSearch(file: any) {
