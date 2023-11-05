@@ -1,46 +1,47 @@
-<div class="container my-5">
+<div class="container-fluid my-4 ps-5">
   <div class="mb-3 d-inline-flex align-items-center justify-content-center">
     <span class="p-input-icon-right">
       <i class="pi pi-search cursor-pointer" pTooltip="SouL Search" (click)="showQueryTable()"></i>
-      <input class="input-field" type="text" pInputText [(ngModel)]="query" placeholder="Search Anything"/>
+      <input class="input-field" type="text" pInputText [(ngModel)]="query" placeholder="Search Anything" />
     </span>
 
     <p-toast></p-toast>
   </div>
-</div>
 
-<div class="card" *ngIf="showTable">
-  <!-- (onPage)="pageChange($event)" -->
-  <p-table [value]="files" [paginator]="true" [rows]="limit" styleClass="p-datatable-striped"
-    [tableStyle]="{ 'min-width': '50rem' }" [currentPageReportTemplate]="pagination_line"
-    (sortFunction)="customSort($event)" [customSort]="true" (onPage)="pageChange($event)" [rowsPerPageOptions]="[5]">
-    <ng-template pTemplate="header">
-      <tr>
-        <th *ngFor="let column of table_config" [pSortableColumn]="column.name" [width]="column.width">
-          {{ column.label }} <p-sortIcon [field]="column.name"></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-file>
-      <tr>
-        <!-- <td *ngFor="let column of table_config">{{ file[column.name] }}</td> -->
-        <td *ngFor="let column of table_config">
-          <ng-container *ngIf="column.name === 'name'; else displayValue">
-            <a style="cursor: pointer;" (click)="dataService.downloadFile(file[column.name])">{{ file[column.name]
-              }}</a>
-          </ng-container>
-          <ng-template #displayValue>
-            {{ file[column.name] }}
-          </ng-template>
-        </td>
+  <div class="card" *ngIf="showTable">
+    <!-- (onPage)="pageChange($event)" -->
+    <p-table [value]="files" [paginator]="true" [rows]="limit" styleClass="p-datatable-striped"
+      [tableStyle]="{ 'min-width': '50rem' }" [currentPageReportTemplate]="pagination_line"
+      (sortFunction)="customSort($event)" [customSort]="true" (onPage)="pageChange($event)" [rowsPerPageOptions]="[10]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let column of table_config" [pSortableColumn]="column.name" [width]="column.width">
+            {{ column.label }} <p-sortIcon [field]="column.name"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-file>
+        <tr>
+          <!-- <td *ngFor="let column of table_config">{{ file[column.name] }}</td> -->
+          <td *ngFor="let column of table_config">
+            <ng-container *ngIf="column.name === 'name'; else displayValue">
+              <a style="cursor: pointer;" (click)="dataService.downloadFile(file[column.name])">{{ file[column.name]
+                }}</a>
+            </ng-container>
+            <ng-template #displayValue>
+              {{ file[column.name] }}
+            </ng-template>
+          </td>
 
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="paginatorleft">
-      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-    </ng-template>
-    <ng-template pTemplate="paginatorright">
-      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
-    </ng-template>
-  </p-table>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+      </ng-template>
+    </p-table>
+  </div>
+
 </div>
