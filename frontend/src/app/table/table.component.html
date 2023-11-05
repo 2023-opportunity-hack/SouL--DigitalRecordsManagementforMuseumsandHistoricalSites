@@ -8,9 +8,9 @@
     <p-toast></p-toast>
   </div>
 
-  <div class="card" *ngIf="showTable">
-    <!-- (onPage)="pageChange($event)" -->
-    <p-table [value]="files" [paginator]="true" [rows]="limit" styleClass="p-datatable-striped"
+  <ng-container *ngIf="showTable">
+    <div class="card soul-border">
+    <p-table [value]="files" [paginator]="true" [rows]="limit" styleClass="p-datatable-striped soul-border"
       [tableStyle]="{ 'min-width': '50rem' }" [currentPageReportTemplate]="pagination_line"
       (sortFunction)="customSort($event)" [customSort]="true" (onPage)="pageChange($event)" [rowsPerPageOptions]="[10]">
       <ng-template pTemplate="header">
@@ -43,5 +43,6 @@
       </ng-template>
     </p-table>
   </div>
+  </ng-container>
 
 </div>

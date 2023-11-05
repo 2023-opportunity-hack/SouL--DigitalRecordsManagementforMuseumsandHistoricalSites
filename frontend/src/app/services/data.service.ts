@@ -5,7 +5,7 @@ import { HttpClient, HttpEventType } from  '@angular/common/http';
   providedIn: 'root'
 })
 export class DataService {
-  url = 'http://10.159.44.185:8080/'
+  url = 'http://10.155.97.102:8080/'
 
   constructor(private http: HttpClient) { }
 

@@ -23,7 +23,7 @@ export class TableComponent implements OnInit {
   filetype = '';
   total_pages = 0;
   pagination_line = '';
-  url = 'http://10.159.44.185:8080/';
+  url = 'http://10.155.97.102:8080/';
 
   showTable = false;
 
