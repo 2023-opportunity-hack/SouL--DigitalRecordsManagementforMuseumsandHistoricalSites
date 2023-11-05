@@ -3,7 +3,7 @@ import os
 from PIL import Image
 from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 
-model_path = '/Users/rohan/3_Resources/ai_models/trocr-base-handwritten'
+model_path = 'microsoft/trocr-base-handwritten'
 processor = TrOCRProcessor.from_pretrained(model_path)
 model = VisionEncoderDecoderModel.from_pretrained(model_path)
 

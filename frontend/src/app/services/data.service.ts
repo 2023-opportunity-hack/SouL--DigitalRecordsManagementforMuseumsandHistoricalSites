@@ -138,7 +138,7 @@ export class DataService {
   }
 
   getFiles() {
-    query: [
+    let query = [
       {
         date: 'Tue Oct 11 07:16:14 2011',
         name: 'Carlson.Anderson.acq0001.jpg',
@@ -308,6 +308,8 @@ export class DataService {
         rank: '28'
       }
     ]
+
+    return query
   }
 
   getProductsData() {
