@@ -5,7 +5,7 @@ import { HttpClient, HttpEventType } from  '@angular/common/http';
   providedIn: 'root'
 })
 export class DataService {
-  url = 'http://10.159.44.185:8080/'
+  url = 'http://10.155.97.102:8080/'
 
   constructor(private http: HttpClient) { }
 
@@ -138,7 +138,7 @@ export class DataService {
   }
 
   getFiles() {
-    query: [
+    let query = [
       {
         date: 'Tue Oct 11 07:16:14 2011',
         name: 'Carlson.Anderson.acq0001.jpg',
@@ -308,6 +308,8 @@ export class DataService {
         rank: '28'
       }
     ]
+
+    return query
   }
 
   getProductsData() {

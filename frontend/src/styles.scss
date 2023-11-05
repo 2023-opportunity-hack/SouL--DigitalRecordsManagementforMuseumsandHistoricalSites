@@ -15,10 +15,19 @@
   width: 600px;
   border-radius: 50px;
   border-width: 2px;
-  border-left-color: hsl(158, 82, 57, 85%);
-  border-bottom-color: hsl(158, 82, 57, 85%);
-  border-right-color: hsl(252, 82, 57);
-  border-top-color: hsl(252, 82, 57);
+  border-left-color: #37eba9d9;
+  border-bottom-color: #37eba9d9;
+  border-right-color: #5b37eb;
+  border-top-color: #5b37eb;
+}
+
+.soul-border {
+  // border-radius: 50px !important;
+  border-width: 2px !important;
+  border-left-color: #37eba9d9 !important;
+  border-bottom-color: #37eba9d9 !important;
+  border-right-color: #5b37eb !important;
+  border-top-color: #5b37eb !important;
 }
 
 .cursor-pointer {

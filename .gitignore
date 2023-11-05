@@ -5,3 +5,6 @@ node_modules
 fernetKey.key
 *.DS_Store
 elasticsearch_lib
+*.env
+.vscode/settings.json
+elastic_search/elasticsearch-7.17.14-amd64.deb

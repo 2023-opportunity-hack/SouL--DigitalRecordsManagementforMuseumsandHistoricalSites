@@ -23,7 +23,7 @@ export class TableComponent implements OnInit {
   filetype = '';
   total_pages = 0;
   pagination_line = '';
-  url = 'http://10.159.44.185:8080/';
+  url = 'http://10.155.97.102:8080/';
 
   showTable = false;
 
@@ -35,19 +35,19 @@ export class TableComponent implements OnInit {
       filter: false,
     },
     {
-      name: 'filename',
+      name: 'name',
       label: 'Name',
       width: '40%',
       filter: true,
     },
     {
-      name: 'filetype',
+      name: 'type',
       label: 'Categories',
       width: '20%',
       filter: true,
     },
     {
-      name: 'creation_date',
+      name: 'date',
       label: 'Date',
       width: '40%',
       filter: false,
@@ -68,6 +68,7 @@ export class TableComponent implements OnInit {
     this.route.queryParams.subscribe((params: { [x: string]: any; }) => {
       // Access the 'query' parameter
       this.query = params['query'];
+      this.showQueryTable();
 
       // Now you can use this.queryParam as needed
     });
@@ -125,9 +126,11 @@ export class TableComponent implements OnInit {
       request = request + '&filetype=' + this.filetype;
     }
 
-    this.http.get(this.url + 'search' + request).subscribe((response: any) => {
-      this.files = response;
-    });
+    this.files = this.dataService.getFiles();
+
+    // this.http.get(this.url + 'search' + request).subscribe((response: any) => {
+    //   this.files = response;
+    // });
   }
 
   pageChange(event: any) {
