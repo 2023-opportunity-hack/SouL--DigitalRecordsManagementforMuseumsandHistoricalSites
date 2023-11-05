@@ -6,3 +6,4 @@ fernetKey.key
 *.DS_Store
 *.env
 .vscode/settings.json
+elastic_search/elasticsearch-7.17.14-amd64.deb
