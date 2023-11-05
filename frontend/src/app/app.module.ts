@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import { TableComponent } from './table/table.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ViewerComponent } from './viewer/viewer.component';
+import { MatDialogModule } from '@angular/material/dialog';
 // import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ViewerComponent } from './viewer/viewer.component';
     FileUploadModule,
     ToastModule,
     PaginatorModule,
+    MatDialogModule,
     ButtonModule,
     BrowserAnimationsModule,
     HttpClientModule,
