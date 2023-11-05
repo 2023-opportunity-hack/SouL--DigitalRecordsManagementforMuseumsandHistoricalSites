@@ -12,11 +12,11 @@ import { FileUploadEvent } from 'primeng/fileupload';
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-})
+})  
 export class TableComponent implements OnInit {
   query: string = '';
   files: any = [];
-  limit = 10;
+  limit = 5;
   offset = 0;
   sort_by = 'rank';
   sort_order = 1;
@@ -35,19 +35,19 @@ export class TableComponent implements OnInit {
       filter: false,
     },
     {
-      name: 'name',
+      name: 'filename',
       label: 'Name',
       width: '40%',
       filter: true,
     },
     {
-      name: 'type',
+      name: 'filetype',
       label: 'Categories',
       width: '20%',
       filter: true,
     },
     {
-      name: 'date',
+      name: 'creation_date',
       label: 'Date',
       width: '40%',
       filter: false,
@@ -126,11 +126,11 @@ export class TableComponent implements OnInit {
       request = request + '&filetype=' + this.filetype;
     }
 
-    this.files = this.dataService.getFiles();
+    // this.files = this.dataService.getFiles();
 
-    // this.http.get(this.url + 'search' + request).subscribe((response: any) => {
-    //   this.files = response;
-    // });
+    this.http.get(this.url + 'search' + request).subscribe((response: any) => {
+      this.files = response;
+    });
   }
 
   pageChange(event: any) {

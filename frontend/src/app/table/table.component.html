@@ -12,7 +12,7 @@
     <div class="card soul-border">
     <p-table [value]="files" [paginator]="true" [rows]="limit" styleClass="p-datatable-striped soul-border"
       [tableStyle]="{ 'min-width': '50rem' }" [currentPageReportTemplate]="pagination_line"
-      (sortFunction)="customSort($event)" [customSort]="true" (onPage)="pageChange($event)" [rowsPerPageOptions]="[10]">
+      (sortFunction)="customSort($event)" [customSort]="true" (onPage)="pageChange($event)" [rowsPerPageOptions]="[5]">
       <ng-template pTemplate="header">
         <tr>
           <th *ngFor="let column of table_config" [pSortableColumn]="column.name" [width]="column.width">
